@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/17 12:42:41 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/20 18:01:51 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS			=	src/01main/cub3D.c \
 					src/02inputvalidation/arg_validation.c \
 					src/02inputvalidation/ext_validation.c	\
 					src/02inputvalidation/file_access_validation.c	\
-					src/02inputvalidation/file_content_validation.c	\
+					src/03structureinitialization/parse_scene_file.c	\
+					src/03structureinitialization/parse_textures.c	\
 					src/07error/error_handling.c \
 					src/03structureinitialization/load_map.c \
 					src/03structureinitialization/read_and_initialize_map.c \

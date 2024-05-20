@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 12:46:47 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/04 12:22:23 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:59:31 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+int		ft_iswhitespace(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

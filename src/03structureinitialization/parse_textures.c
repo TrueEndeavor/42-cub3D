@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_and_initialize_map.c                          :+:      :+:    :+:   */
+/*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/20 17:24:18 by lannur-s         ###   ########.fr       */
+/*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
+/*   Updated: 2024/05/20 19:05:44 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-/*
 #include "cub3D.h"
 
-char	*trim_newline(char *str)
+/* char	*trim_newline(char *str)
 {
 	int		len;
 
@@ -24,33 +22,26 @@ char	*trim_newline(char *str)
 		str[len - 1] = '\0';
 	}
 	return (str);
-}
+} */
 
-void	read_and_initialize_map(t_data *data, char *map)
+void	parse_textures(int direction, t_textures *textures, char *line)
 {
-	int		fd;
-	char	*line;
+	char	*tex_file;
 
-	fd = check_readable(data, map);
-	line = get_next_line(fd);
-	if (!line)
+	while (ft_iswhitespace(*line) && (*line) != '\n')
 	{
-		display_error("Map file empty");
-		on_destroy(data);
+		line++;
 	}
-	data->width = (int) ft_strlen(line) - 1;
-	while (line)
-	{
-	printf("....printing the line = %s\n", line);
-		if (!line)
-			on_destroy(data);
-		data->height++;
-		if (!load_map(data, trim_newline(line)))
-			on_destroy(data);
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
+	tex_file = line;
+	printf("tex_file = %s\n", tex_file);
+	if (direction == NORTH)
+		textures->north_texture = ft_strdup(tex_file);
+	if (direction == EAST)
+		textures->north_texture = ft_strdup(tex_file);
+	if (direction == SOUTH)
+		textures->north_texture = ft_strdup(tex_file);
+	if (direction == WEST)
+		textures->north_texture = ft_strdup(tex_file);
+	
+	//free(line);
 }
- */

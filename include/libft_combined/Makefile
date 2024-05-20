@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 12:46:34 by lannur-s          #+#    #+#              #
-#    Updated: 2023/12/04 12:21:33 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/20 17:56:48 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS = src/conversion/ft_atoi.c \
 		src/ctype/ft_isascii.c \
 		src/ctype/ft_isdigit.c \
 		src/ctype/ft_isprint.c \
+		src/ctype/ft_iswhitespace.c \
 		src/ctype/ft_tolower.c \
 		src/ctype/ft_toupper.c \
 		src/env/ft_path_utils.c \

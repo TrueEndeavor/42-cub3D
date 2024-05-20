@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/17 12:45:22 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/20 19:05:16 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,49 @@
 # include <X11/keysym.h>
 # include "mlx.h"
 
+# include <stdio.h> // to be deleted later
+
 /* *****************************   STRUCTURES   *******************************/
+# define NORTH 1
+# define EAST 2
+# define SOUTH 3
+# define WEST 4
+
+typedef struct RGB_STRUCT
+{
+	int			red;
+	int			green;
+	int			blue;
+}	t_rgb;
+
+typedef struct TEXTURE_ELEMET
+{
+	char		*north_texture;
+	char		*east_texture;
+	char		*south_texture;
+	char		*west_texture;
+}	t_textures;
+
+typedef struct COLORS
+{
+	t_rgb	floor;
+	t_rgb	ceiling;
+}	t_colors;
+
 typedef struct s_data
 {
-	int		height;
-	int		width;
+	t_textures	*textures;
+	t_colors	*colors;
+
+	int			height;
+	int			width;
+
+	t_list		*map;
+	char		**dup_map;
 
 	int		e_count;
 	int		p_count;
 	int		c_count;
-
-	t_list	*map;
-	char	**dup_map;
-
 	int		start_x;
 	int		start_y;
 
@@ -77,9 +107,10 @@ typedef struct s_data
 
 bool	check_args(int ac);
 bool	check_cub_extension(char *file_name);
-int 	check_readable(t_data *data, char *map);
+int 	check_readable(t_data *data, char *scene_file);
 
-void	read_and_initialize_map(t_data *data, char *file_name);
+void	parse_scene_file(t_data *data, char *scene_file);
+void	parse_textures(int direction, t_textures *textures, char *line);
 int		load_map(t_data *data, char *line);
 
 int		validate_map(t_data *data);

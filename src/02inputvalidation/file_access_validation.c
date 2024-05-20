@@ -6,17 +6,17 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 12:41:39 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/17 12:41:50 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:35:22 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	check_readable(t_data *data, char *map)
+int	check_readable(t_data *data, char *scene_file)
 {
 	int		fd;
 
-	fd = open(map, O_RDONLY);
+	fd = open(scene_file, O_RDONLY);
 	if (fd < 0 || read(fd, NULL, 0) < 0)
 	{
 		if (errno == ENOENT)
@@ -34,7 +34,5 @@ int	check_readable(t_data *data, char *map)
 		on_destroy(data);
 		return (false);
 	}
-	if (fd >= 0)
-		close(fd);
 	return (fd);
 }
