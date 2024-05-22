@@ -6,36 +6,39 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/21 10:44:52 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:51:49 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-/* char	*trim_newline(char *str)
-{
-	int		len;
-
-	len = ft_strlen(str);
-	if (len > 0 && str[len - 1] == '\n')
-	{
-		str[len - 1] = '\0';
-	}
-	return (str);
-} */
-
-char *trim_whitespace(char *line)
-{
-	while (*line && ft_iswhitespace(*line))
-		line++;
-	return line;
-}
 
 void get_texture(char *line, char **texture, int *count)
 {
 	trim_whitespace(&line);
 	*texture = ft_strdup(line);
 	(*count)++;
+}
+
+int	get_direction(const char *line)
+{
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return NORTH;
+	if (ft_strncmp(line, "EA", 2) == 0)
+		return EAST;
+	if (ft_strncmp(line, "SO", 2) == 0)
+		return SOUTH;
+	if (ft_strncmp(line, "WE", 2) == 0)
+		return WEST;
+	return (-1);
+}
+
+void parse_texture_line(char *line, t_textures *textures)
+{
+	int direction = get_direction(line);
+	if (direction != -1)
+	{
+		parse_textures(direction, textures, line + 2);
+	}
 }
 
 void	parse_textures(int direction, t_textures *textures, char *line)

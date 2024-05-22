@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/21 08:30:54 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/22 13:40:38 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 # define EAST 2
 # define SOUTH 3
 # define WEST 4
+
+# define CEILING 1
+# define FLOOR 2
 
 typedef struct RGB_STRUCT
 {
@@ -109,12 +112,27 @@ typedef struct s_data
 # define MIN_HEIGHT 3
 # define MIN_WIDTH 3
 
+/* *************************   INPUT VALIDATION   ****************************/
+
 bool	check_args(int ac);
 bool	check_cub_extension(char *file_name);
-int 	check_readable(t_data *data, char *scene_file);
+int		check_readable(t_data *data, char *scene_file);
+
+/* *************************   PARSING   ****************************/
 
 void	parse_scene_file(t_data *data, char *scene_file);
+void	parse_texture_line(char *line, t_textures *textures);
+void	parse_color_line(char *line, t_colors *colors);
+
 void	parse_textures(int direction, t_textures *textures, char *line);
+
+/* *************************   PARSING UTILS  ****************************/
+void	trim_whitespace(char **line);
+char	*trim_newline(char *str);
+int		is_texture_line(const char *line);
+int		is_color_line(const char *line);
+int		parse_int(char **str);
+
 int		load_map(t_data *data, char *line);
 
 int		validate_map(t_data *data);
