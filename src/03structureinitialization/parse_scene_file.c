@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/20 19:04:58 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:54:59 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ char	*trim_newline(char *str)
 	}
 	return (str);
 }
+int get_direction(const char *line)
+{
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return NORTH;
+	if (ft_strncmp(line, "EA", 2) == 0)
+		return EAST;
+	if (ft_strncmp(line, "SO", 2) == 0)
+		return SOUTH;
+	if (ft_strncmp(line, "WE", 2) == 0)
+		return WEST;
+	return -1;
+}
 
 void	parse_scene_file(t_data *data, char *scene_file)
 {
@@ -31,7 +43,8 @@ void	parse_scene_file(t_data *data, char *scene_file)
 	int     direction;
 	t_textures  *textures;
 	
-	textures = (t_textures *)malloc(sizeof(t_textures));
+	
+	textures = {NULL, 0, NULL, 0, NULL, 0, NULL, 0};
 	fd = check_readable(data, scene_file);
 	line = get_next_line(fd);
 	if (!line)
@@ -44,6 +57,7 @@ void	parse_scene_file(t_data *data, char *scene_file)
 	{
 		if (!line) // maybe to skip an empty newline, empty and what not
 			on_destroy(data);
+		parse_line(line, data);
 		if ((ft_strncmp(line, "NO", 2) == 0) || \
 			(ft_strncmp(line, "EA", 2) == 0) || \
 			(ft_strncmp(line, "SO", 2) == 0) || \

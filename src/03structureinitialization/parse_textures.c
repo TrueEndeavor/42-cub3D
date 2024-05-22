@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/20 19:05:44 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:44:52 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,33 @@
 	return (str);
 } */
 
+char *trim_whitespace(char *line)
+{
+	while (*line && ft_iswhitespace(*line))
+		line++;
+	return line;
+}
+
+void get_texture(char *line, char **texture, int *count)
+{
+	trim_whitespace(&line);
+	*texture = ft_strdup(line);
+	(*count)++;
+}
+
 void	parse_textures(int direction, t_textures *textures, char *line)
 {
-	char	*tex_file;
-
-	while (ft_iswhitespace(*line) && (*line) != '\n')
-	{
-		line++;
-	}
-	tex_file = line;
-	printf("tex_file = %s\n", tex_file);
 	if (direction == NORTH)
-		textures->north_texture = ft_strdup(tex_file);
-	if (direction == EAST)
-		textures->north_texture = ft_strdup(tex_file);
-	if (direction == SOUTH)
-		textures->north_texture = ft_strdup(tex_file);
+		get_texture(line, &textures->north_texture, &textures->no_count);
+	else if (direction == EAST)
+		get_texture(line, &textures->east_texture, &textures->ea_count);
+	else if (direction == SOUTH)
+		get_texture(line, &textures->south_texture, &textures->so_count);
 	if (direction == WEST)
-		textures->north_texture = ft_strdup(tex_file);
-	
+		get_texture(line, &textures->west_texture, &textures->we_count);
 	//free(line);
+	/*free(textures.north_texture);
+	free(textures.east_texture);
+	free(textures.south_texture);
+	free(textures.west_texture);*/
 }

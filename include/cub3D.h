@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/20 19:05:16 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/21 08:30:54 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ typedef struct RGB_STRUCT
 typedef struct TEXTURE_ELEMET
 {
 	char		*north_texture;
+	int			no_count;
 	char		*east_texture;
+	int			ea_count;	
 	char		*south_texture;
+	int			so_count;	
 	char		*west_texture;
+	int			we_count;	
 }	t_textures;
 
 typedef struct COLORS
