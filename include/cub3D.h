@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 10:09:43 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:47:52 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ typedef struct s_data
 	t_colors	colors;
 
 	t_list		*map;
-	char		**dup_map;
 
 	void		*player_ptr;
 
+	char		**dup_map;
 	int		e_count;
 	int		p_count;
 	int		c_count;
@@ -139,8 +139,9 @@ void	parse_textures(int direction, t_textures *textures, char *line);
 /* *************************   PARSING UTILS  ****************************/
 void	trim_whitespace(char **line);
 char	*trim_newline(char *str);
-int		is_texture_line(const char *line);
-int		is_color_line(const char *line);
+int		is_texture_line(char *line);
+int		is_color_line(char *line);
+int		is_map_line(char *line);
 int		parse_int(char **str);
 bool	check_xpm_extension(char *file_name);
 

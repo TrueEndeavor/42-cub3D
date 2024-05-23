@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:32:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/22 16:14:37 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:59:37 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*trim_newline(char *str)
 	return (str);
 }
 
-int	is_texture_line(const char *line)
+int	is_texture_line(char *line)
 {
 	return (ft_strncmp(line, "NO", 2) == 0 || \
 			ft_strncmp(line, "EA", 2) == 0 || \
@@ -40,9 +40,24 @@ int	is_texture_line(const char *line)
 			ft_strncmp(line, "WE", 2) == 0);
 }
 
-int	is_color_line(const char *line)
+int	is_color_line(char *line)
 {
 	return (ft_strncmp(line, "C", 1) == 0 || ft_strncmp(line, "F", 1) == 0);
+}
+
+int	is_map_line(char *line)
+{
+	while (*line)
+	{
+		printf("line = %s\n", line);
+		if (*line != ' ' && *line != '1' && *line != '0' &&
+			*line != 'N' && *line != 'S' && *line != 'E' && *line != 'W')
+		{
+			return (0);
+		}
+		line++;
+	}
+	return (1);
 }
 
 int	parse_int(char **str)
