@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 16:32:38 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:15:21 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@ void	parse_line(char *line, t_data *data)
 		parse_texture_line(line, &data->textures);
 	else if (is_color_line(line))
 		parse_color_line(line, &data->colors);
-	
-	/* printf("****PARSE COLORS****\n");
-	printf("data->colors.ceiling.rgb = %d, %d, %d\n", data->colors.ceiling.red, data->colors.ceiling.green, data->colors.ceiling.blue);
-	printf("data->colors.ceiling_count = %d\n", data->colors.ceiling_count);
-	
-	printf("data->colors.floor.rgb = %d, %d, %d\n", data->colors.floor.red, data->colors.floor.green, data->colors.floor.blue);
-	printf("data->colors.floor_count = %d\n", data->colors.floor_count); */
 }
 
 bool	check_textures_and_colors(t_data *data, bool map_started)
@@ -67,6 +60,7 @@ bool	check_textures_and_colors(t_data *data, bool map_started)
 		!((data->colors.floor.green >= 0) && (data->colors.floor.green <= 255)) || \
 		!((data->colors.floor.blue >= 0) && (data->colors.floor.blue <= 255)))
 	{
+	
 		//if (map_started)
 		//	return (display_error("Map is either in the top or middle of the scene"));
 		return (display_error("RGB values of one of the colors is missing"));
@@ -140,7 +134,7 @@ void	parse_scene_file(t_data *data, char *scene_file)
 		// Check if Colors are filled
 		// only then parse_map();
 		// Is map missing?
-	}		
+	}
 	free(line);
 	close(fd);
 }
