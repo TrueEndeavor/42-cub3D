@@ -6,24 +6,33 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/22 14:33:34 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:30:09 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	get_color(char *line, t_rgb *rgb)
+void	get_color(char *line, int type, t_colors *colors)
 {
 	trim_whitespace(&line);
-	rgb->red = parse_int(&line);
+	if (type == CEILING)
+		colors->ceiling.red = parse_int(&line);
+	if (type == FLOOR)
+		colors->floor.red = parse_int(&line);
 	if (*line == ',')
 		line++;
 	trim_whitespace(&line);
-	rgb->green = parse_int(&line);
+	if (type == CEILING)
+		colors->ceiling.green = parse_int(&line);
+	if (type == FLOOR)
+		colors->floor.green = parse_int(&line);
 	if (*line == ',')
 		line++;
 	trim_whitespace(&line);
-	rgb->blue = parse_int(&line);
+	if (type == CEILING)
+		colors->ceiling.blue = parse_int(&line);
+	if (type == FLOOR)
+		colors->floor.blue = parse_int(&line);
 }
 
 int	get_color_type(const char *line)
@@ -34,31 +43,21 @@ int	get_color_type(const char *line)
 		return (CEILING);
 	return (-1);
 }
-/* void	parse_colors(int direction, t_textures *textures, char *line)
-{
-
-} */
 
 void	parse_color_line(char *line, t_colors *colors)
 {
 	int		type;
-	t_rgb	rgb_c;
-	t_rgb	rgb_f;
 
-	rgb_c = (t_rgb){0, 0, 0};
-	rgb_f = (t_rgb){0, 0, 0};
 	type = get_color_type(line);
-	(void) colors;
-
 	trim_whitespace(&line);
 	if (type == CEILING)
 	{
-		get_color(line + 1, &rgb_c);
+		get_color(line + 1, type, colors);
 		colors->ceiling_count++;
 	}
 	else if (type == FLOOR)
 	{
-		get_color(line + 1, &rgb_f);
+		get_color(line + 1, type, colors);
 		colors->floor_count++;
 	}
 }

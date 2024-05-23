@@ -6,13 +6,13 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/22 15:41:46 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:30:44 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void get_texture(char *line, char **texture, int *count)
+void	get_texture(char *line, char **texture, int *count)
 {
 	trim_whitespace(&line);
 	*texture = ft_strdup(line);
@@ -22,13 +22,13 @@ void get_texture(char *line, char **texture, int *count)
 int	get_direction(const char *line)
 {
 	if (ft_strncmp(line, "NO", 2) == 0)
-		return NORTH;
+		return (NORTH);
 	if (ft_strncmp(line, "EA", 2) == 0)
-		return EAST;
+		return (EAST);
 	if (ft_strncmp(line, "SO", 2) == 0)
-		return SOUTH;
+		return (SOUTH);
 	if (ft_strncmp(line, "WE", 2) == 0)
-		return WEST;
+		return (WEST);
 	return (-1);
 }
 

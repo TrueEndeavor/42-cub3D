@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/23 09:44:45 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/23 16:23:17 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS			=	src/01main/cub3D.c \
 					src/03parsing/parse_textures.c	\
 					src/03parsing/parse_colors.c	\
 					src/03parsing/parse_utils.c	\
+					src/03parsing/parse_utils1.c	\
 					src/07error/error_handling.c \
 					src/03parsing/load_map.c \
 					src/06destroy/destroy.c

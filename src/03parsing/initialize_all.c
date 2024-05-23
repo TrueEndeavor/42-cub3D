@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 13:11:37 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:12:18 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	init_all_texures(t_textures *textures)
 
 void	init_all_colors(t_colors *colors)
 {
-	colors->floor.red = 0;
-	colors->floor.green = 0;
-	colors->floor.blue = 0;
-	colors->ceiling.red = 0;
-	colors->ceiling.green = 0;
-	colors->ceiling.blue = 0;
+	colors->floor.red = -1;
+	colors->floor.green = -1;
+	colors->floor.blue = -1;
+	colors->ceiling.red = -1;
+	colors->ceiling.green = -1;
+	colors->ceiling.blue = -1;
 	colors->floor_count = 0;
 	colors->ceiling_count = 0;
 }
