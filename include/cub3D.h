@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/22 13:40:38 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 10:09:43 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 # include <stdio.h> // to be deleted later
 
-/* *****************************   STRUCTURES   *******************************/
+/* *****************************   CONSTANTS   *******************************/
 # define NORTH 1
 # define EAST 2
 # define SOUTH 3
@@ -45,6 +45,13 @@
 # define CEILING 1
 # define FLOOR 2
 
+/* # define WIN_WIDTH 960 */
+/* # define WIN_HEIGHT 720 */
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
+
+/* *****************************   STRUCTURES   *******************************/
+
 typedef struct RGB_STRUCT
 {
 	int			red;
@@ -52,7 +59,7 @@ typedef struct RGB_STRUCT
 	int			blue;
 }	t_rgb;
 
-typedef struct TEXTURE_ELEMET
+typedef struct TEXTURE_ELEMENT
 {
 	char		*north_texture;
 	int			no_count;
@@ -67,19 +74,26 @@ typedef struct TEXTURE_ELEMET
 typedef struct COLORS
 {
 	t_rgb	floor;
+	int		floor_count;
 	t_rgb	ceiling;
+	int		ceiling_count;	
 }	t_colors;
 
 typedef struct s_data
 {
-	t_textures	*textures;
-	t_colors	*colors;
+	void		*mlx_ptr;
+	void		*win_ptr;
 
-	int			height;
-	int			width;
+	int			win_height;
+	int			win_width;
+
+	t_textures	textures;
+	t_colors	colors;
 
 	t_list		*map;
 	char		**dup_map;
+
+	void		*player_ptr;
 
 	int		e_count;
 	int		p_count;
@@ -87,13 +101,9 @@ typedef struct s_data
 	int		start_x;
 	int		start_y;
 
-	void	*mlx_ptr;
-	void	*win_ptr;
-
 	void	*floor_ptr;
 	void	*paw_ptr;
 	void	*wall_ptr;
-	void	*player_ptr;
 	void	*flower_ptr;
 	void	*lover_ptr;
 	void	*fluffy_love_ptr;
@@ -113,7 +123,7 @@ typedef struct s_data
 # define MIN_WIDTH 3
 
 /* *************************   INPUT VALIDATION   ****************************/
-
+void	init_data(t_data *data);
 bool	check_args(int ac);
 bool	check_cub_extension(char *file_name);
 int		check_readable(t_data *data, char *scene_file);
@@ -132,6 +142,9 @@ char	*trim_newline(char *str);
 int		is_texture_line(const char *line);
 int		is_color_line(const char *line);
 int		parse_int(char **str);
+bool	check_xpm_extension(char *file_name);
+
+int		check_texture_file(char *file_name);
 
 int		load_map(t_data *data, char *line);
 

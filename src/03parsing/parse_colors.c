@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/22 13:46:18 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:33:34 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int	get_color_type(const char *line)
 		return (CEILING);
 	return (-1);
 }
+/* void	parse_colors(int direction, t_textures *textures, char *line)
+{
+
+} */
 
 void	parse_color_line(char *line, t_colors *colors)
 {
@@ -50,10 +54,11 @@ void	parse_color_line(char *line, t_colors *colors)
 	if (type == CEILING)
 	{
 		get_color(line + 1, &rgb_c);
+		colors->ceiling_count++;
 	}
 	else if (type == FLOOR)
 	{
 		get_color(line + 1, &rgb_f);
+		colors->floor_count++;
 	}
-	// set colors into data
 }

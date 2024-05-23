@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:49:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/12 10:10:18 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:47:03 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void	set_player(t_data *data)
 void	init_images(t_data *data)
 {
 	data->floor_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/empty.xpm", &(data->width), &(data->height));
+			"./assets/empty.xpm", &(data->win_width), &(data->win_height));
 	data->paw_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/paw.xpm", &(data->width), &(data->height));
+			"./assets/paw.xpm", &(data->win_width), &(data->win_height));
 	data->flower_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/collectible.xpm", &(data->width), &(data->height));
+			"./assets/collectible.xpm", &(data->win_width), &(data->win_height));
 	data->lover_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/exit_3.xpm", &(data->width), &(data->height));
+			"./assets/exit_3.xpm", &(data->win_width), &(data->win_height));
 	data->wall_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/wall.xpm", &(data->width), &(data->height));
+			"./assets/wall.xpm", &(data->win_width), &(data->win_height));
 	data->player_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/player.xpm", &(data->width), &(data->height));
+			"./assets/player.xpm", &(data->win_width), &(data->win_height));
 	data->fluffy_love_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/lover_4.xpm", &(data->width), &(data->height));
+			"./assets/lover_4.xpm", &(data->win_width), &(data->win_height));
 	if (!data->floor_ptr || !data->paw_ptr || !data->flower_ptr
 		|| !data->lover_ptr || !data->wall_ptr || !data->player_ptr)
 	{
@@ -101,7 +101,7 @@ void	set_images(t_data *data)
 int	set_up(t_data *data)
 {
 	data->win_ptr = mlx_new_window(data->mlx_ptr, \
-		data->width * PIXELS, data->height * PIXELS, \
+		data->win_width * PIXELS, data->win_height * PIXELS, \
 		" Purr-fect Petals Pursuit ");
 	if (!data->win_ptr)
 	{

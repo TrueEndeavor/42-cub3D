@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/18 09:50:23 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:47:03 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_rectangle(t_data *data)
 	current = data->map;
 	while (current)
 	{
-		if ((ft_strlen((char *)current->content)) != (size_t) data->width)
+		if ((ft_strlen((char *)current->content)) != (size_t) data->win_width)
 		{
 			display_error("Map is not rectangular");
 			return (0);
@@ -31,8 +31,8 @@ int	check_rectangle(t_data *data)
 
 int	check_size(t_data *data)
 {
-	if (data->height < MIN_HEIGHT || data->width < MIN_WIDTH
-		|| data->width > MAX_WIDTH || data->height > MAX_HEIGHT)
+	if (data->win_height < MIN_HEIGHT || data->win_width < MIN_WIDTH
+		|| data->win_width > MAX_WIDTH || data->win_height > MAX_HEIGHT)
 	{
 		display_error("Size not adapted for game");
 		return (0);
@@ -79,7 +79,7 @@ int	check_walls(t_data *data)
 	y = 0;
 	while (current)
 	{
-		if (y == 0 || y == (data->height - 1))
+		if (y == 0 || y == (data->win_height - 1))
 		{
 			x = 0;
 			while (((char *)current->content)[x] != '\0' && x < data-> width)
@@ -90,7 +90,7 @@ int	check_walls(t_data *data)
 			}
 		}
 		if (((char *)current->content)[0] != '1'
-			|| ((char *)current->content)[data->width - 1] != '1')
+			|| ((char *)current->content)[data->win_width - 1] != '1')
 			return (0);
 		current = current->next;
 		y++;

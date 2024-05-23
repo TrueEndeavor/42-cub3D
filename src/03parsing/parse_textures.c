@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/22 12:51:49 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:41:46 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,9 @@ int	get_direction(const char *line)
 	return (-1);
 }
 
-void parse_texture_line(char *line, t_textures *textures)
-{
-	int direction = get_direction(line);
-	if (direction != -1)
-	{
-		parse_textures(direction, textures, line + 2);
-	}
-}
-
 void	parse_textures(int direction, t_textures *textures, char *line)
 {
+	trim_newline(line);
 	if (direction == NORTH)
 		get_texture(line, &textures->north_texture, &textures->no_count);
 	else if (direction == EAST)
@@ -56,4 +48,15 @@ void	parse_textures(int direction, t_textures *textures, char *line)
 	free(textures.east_texture);
 	free(textures.south_texture);
 	free(textures.west_texture);*/
+}
+
+void	parse_texture_line(char *line, t_textures *textures)
+{
+	int	direction;
+
+	direction = get_direction(line);
+	if (direction != -1)
+	{
+		parse_textures(direction, textures, trim_newline(line + 2));
+	}
 }
