@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/27 11:27:17 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:28:35 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ bool	textures_are_valid(t_textures *textures);
 bool	texture_files_exist(t_textures *textures);
 bool	colors_are_valid(t_colors *colors);
 bool	colors_have_valid_rgb(t_colors *colors);
-int		check_textures_and_colors(t_data *data);
+int		check_textures_and_colors(t_data *data, bool tex_flag, bool col_flag);
 
 /* *************************   PARSING UTILS  ****************************/
 void	trim_whitespace(char **line);

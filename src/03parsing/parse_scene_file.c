@@ -6,32 +6,42 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/27 11:25:18 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:29:33 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	parse_line(char *line, t_data *data)
+void	parse_line(char *line, t_data *data, bool *tex_flag, bool *col_flag)
 {
 	if (line == NULL)
 		return ;
 	trim_whitespace(&line);
 	if (is_texture_line(line))
+	{
 		parse_texture_line(line, &data->textures);
+		*tex_flag = true;
+	}
 	else if (is_color_line(line))
+	{
 		parse_color_line(line, &data->colors);
+		*col_flag = true;
+	}
 }
 
 void	parse_scene_file(t_data *data, char *scene_file)
 {
 	int		fd;
 	char	*line;
-	bool	map_started;
+	bool	map_flag;
+	bool	tex_flag;
+	bool	col_flag;
 	int		error_code;
 
+	tex_flag = false;
+	col_flag = false;
 	error_code = 0;
-	map_started = false;
+	map_flag = false;
 	fd = check_readable(data, scene_file);
 	line = get_next_line(fd);
 	if (!line)
@@ -54,43 +64,44 @@ void	parse_scene_file(t_data *data, char *scene_file)
 			line = get_next_line(fd);
 			continue ;
 		}
-		if (map_started)
-		{
-			if (!load_map(data, trim_newline(line)))
-				on_destroy(data);
-		}
-		else 
+		if (!map_flag)
 		{
 			if (is_texture_line(line) || is_color_line(line))
 			{
-				parse_line(line, data);
+				parse_line(line, data, &tex_flag, &col_flag);
 			}
 			else if (is_map_line(line))
 			{
-				map_started = true;
-				error_code = check_textures_and_colors(data);
-				if (error_code != 0)
+				if (tex_flag && col_flag)
 				{
-					display_error(get_error_message(error_code));
-					on_destroy(data);
-					return;
+					error_code = check_textures_and_colors(data, tex_flag, col_flag);
+					if (error_code != 0)
+					{
+						display_error(get_error_message(error_code));
+						on_destroy(data);
+						return ;
+					}
 				}
-				on_destroy(data);
-				break ;
+				map_flag = true;
 			}
-			if (!load_map(data, trim_newline(line)))
+		}
+		if (map_flag)
+		{
+			if (!load_map(data, line))
+			{
 				on_destroy(data);
+				return ;
+			}
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	// Is textures || colors || map missing?
+	error_code = check_textures_and_colors(data, tex_flag, col_flag);
+	if (error_code != 0)
 	{
-		// Check if Textures are filled
-		// Check if Colors are filled
-		// only then parse_map();
-		// Is map missing?
+		display_error(get_error_message(error_code));
+		on_destroy(data);
+		return ;
 	}
-	free(line);
 	close(fd);
 }
