@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:32:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 16:22:50 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:31:57 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_map_line(char *line)
 {
 	while (*line)
 	{
-		if (*line != ' ' && *line != '1' && *line != '0' &&
+		if (*line != ' ' && *line != '1' && *line != '0' && \
 			*line != 'N' && *line != 'S' && *line != 'E' && *line != 'W')
 		{
 			return (0);

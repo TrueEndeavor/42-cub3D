@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 12:19:40 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:30:58 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
- 	t_data	data;
+	t_data	data;
 
 	if (!check_args(ac))
 		return (0);

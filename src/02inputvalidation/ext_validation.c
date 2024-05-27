@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:00:50 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/22 16:13:12 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:39:18 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ bool	check_cub_extension(char *file_name)
 	if (file_name[len - 4] != '.' || file_name[len - 3] != 'c'\
 		|| file_name[len - 2] != 'u' || file_name[len - 1] != 'b')
 	{
-		display_error("Invalid file name.");
-		display_error("Files without .cub extension not accepted.");
+		display_error("Files without .cub extension not accepted");
 		return (false);
 	}
 	return (true);
@@ -35,8 +34,7 @@ bool	check_xpm_extension(char *file_name)
 	if (file_name[len - 4] != '.' || file_name[len - 3] != 'x'\
 		|| file_name[len - 2] != 'p' || file_name[len - 1] != 'm')
 	{
-		display_error("Invalid file name.");
-		display_error("Files without .xpm extension not accepted.");
+		display_error("Textures are not in XPM format");
 		return (false);
 	}
 	return (true);

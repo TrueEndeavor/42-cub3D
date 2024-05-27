@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/23 18:15:09 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/27 11:27:41 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS			=	src/01main/cub3D.c \
 					src/02inputvalidation/file_access_validation.c	\
 					src/03parsing/initialize_all.c \
 					src/03parsing/parse_scene_file.c	\
+					src/03parsing/parse_data_validation.c	\
 					src/03parsing/parse_textures.c	\
 					src/03parsing/parse_colors.c	\
 					src/03parsing/parse_utils.c	\

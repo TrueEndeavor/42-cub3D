@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 18:15:21 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:25:18 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,69 +23,22 @@ void	parse_line(char *line, t_data *data)
 		parse_color_line(line, &data->colors);
 }
 
-bool	check_textures_and_colors(t_data *data, bool map_started)
-{
-	bool	status;
-	
-	status = false;
-	if (((data->textures.no_count != 1) || \
-		(data->textures.ea_count != 1) || \
-		(data->textures.so_count != 1) || \
-		(data->textures.we_count != 1)))
-	{
-		if (map_started)
-			return (display_error("Map is either in the top or middle of the scene"));
-		return (display_error("One of the textures is missing or double"));
-		//on_destroy(data);
-	}
-	else if ((!check_texture_file(data->textures.north_texture) || \
-		!check_texture_file(data->textures.east_texture) || \
-		!check_texture_file(data->textures.south_texture) || \
-		!check_texture_file(data->textures.west_texture)))
-	{
-		if (map_started)
-			return (display_error("Map is either in the top or middle of the scene"));
-		return (display_error("One of the texture files cannot be opened"));
-		//on_destroy(data);
-	}
-	else if (((data->colors.floor_count != 1) || \
-		(data->colors.ceiling_count != 1)))
-	{
-		if (map_started)
-			return (display_error("Map is either in the top or middle of the scene"));
-		return (display_error("One of the colors is missing or double"));
-		//on_destroy(data);
-	}
-	else if (!((data->colors.floor.red >= 0) && (data->colors.floor.red <= 255)) || \
-		!((data->colors.floor.green >= 0) && (data->colors.floor.green <= 255)) || \
-		!((data->colors.floor.blue >= 0) && (data->colors.floor.blue <= 255)))
-	{
-	
-		//if (map_started)
-		//	return (display_error("Map is either in the top or middle of the scene"));
-		return (display_error("RGB values of one of the colors is missing"));
-		//on_destroy(data);
-	}	
-	else
-	{
-		status = true;
-	}
-	return (status);	
-}
-
 void	parse_scene_file(t_data *data, char *scene_file)
 {
 	int		fd;
 	char	*line;
 	bool	map_started;
+	int		error_code;
 
+	error_code = 0;
 	map_started = false;
 	fd = check_readable(data, scene_file);
 	line = get_next_line(fd);
 	if (!line)
 	{
-		display_error("Map file empty");
+		display_error("The file is empty");
 		on_destroy(data);
+		return ;
 	}
 	while (line)
 	{
@@ -114,16 +67,19 @@ void	parse_scene_file(t_data *data, char *scene_file)
 			}
 			else if (is_map_line(line))
 			{
-				if (!check_textures_and_colors(data, map_started))
-				{
-					//display_error("grave");
-					on_destroy(data);
-					break ;
-				}
 				map_started = true;
-				if (!load_map(data, trim_newline(line)))
+				error_code = check_textures_and_colors(data);
+				if (error_code != 0)
+				{
+					display_error(get_error_message(error_code));
 					on_destroy(data);
+					return;
+				}
+				on_destroy(data);
+				break ;
 			}
+			if (!load_map(data, trim_newline(line)))
+				on_destroy(data);
 		}
 		free(line);
 		line = get_next_line(fd);

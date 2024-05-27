@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 18:12:24 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:27:17 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 
+# define ERR_TEXTURE_MISSING_OR_DUPLICATED 11
+# define ERR_COLOR_MISSING_OR_DUPLICATED 12
+
+# define ERR_TEXTURE_FILE_CANNOT_OPEN 21
+# define ERR_COLOR_RGB_VALUES_MISSING 22
+
+# define ERR_MAP_POSITION_INVALID 31
+
+
 /* *****************************   STRUCTURES   *******************************/
 
 typedef struct RGB_STRUCT
@@ -64,11 +73,11 @@ typedef struct TEXTURE_ELEMENT
 	char		*north_texture;
 	int			no_count;
 	char		*east_texture;
-	int			ea_count;	
+	int			ea_count;
 	char		*south_texture;
-	int			so_count;	
+	int			so_count;
 	char		*west_texture;
-	int			we_count;	
+	int			we_count;
 }	t_textures;
 
 typedef struct COLORS
@@ -76,7 +85,7 @@ typedef struct COLORS
 	t_rgb	floor;
 	int		floor_count;
 	t_rgb	ceiling;
-	int		ceiling_count;	
+	int		ceiling_count;
 }	t_colors;
 
 typedef struct s_data
@@ -133,8 +142,13 @@ int		check_readable(t_data *data, char *scene_file);
 void	parse_scene_file(t_data *data, char *scene_file);
 void	parse_texture_line(char *line, t_textures *textures);
 void	parse_color_line(char *line, t_colors *colors);
-
 void	parse_textures(int direction, t_textures *textures, char *line);
+
+bool	textures_are_valid(t_textures *textures);
+bool	texture_files_exist(t_textures *textures);
+bool	colors_are_valid(t_colors *colors);
+bool	colors_have_valid_rgb(t_colors *colors);
+int		check_textures_and_colors(t_data *data);
 
 /* *************************   PARSING UTILS  ****************************/
 void	trim_whitespace(char **line);
@@ -174,6 +188,7 @@ void	free_maps(t_data *data);
 void	destroy_images(t_data *data);
 
 int		display_error(char *str);
+char	*get_error_message(int error_code);
 
 void	win_game(t_data *data, char move);
 void	win_in_direction(t_data *data, int delta_x, int delta_y);
