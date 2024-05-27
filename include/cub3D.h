@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 13:47:52 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:17:16 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ typedef struct TEXTURE_ELEMENT
 	char		*north_texture;
 	int			no_count;
 	char		*east_texture;
-	int			ea_count;	
+	int			ea_count;
 	char		*south_texture;
-	int			so_count;	
+	int			so_count;
 	char		*west_texture;
-	int			we_count;	
+	int			we_count;
 }	t_textures;
 
 typedef struct COLORS
@@ -76,7 +76,7 @@ typedef struct COLORS
 	t_rgb	floor;
 	int		floor_count;
 	t_rgb	ceiling;
-	int		ceiling_count;	
+	int		ceiling_count;
 }	t_colors;
 
 typedef struct s_data
@@ -101,17 +101,7 @@ typedef struct s_data
 	int		start_x;
 	int		start_y;
 
-	void	*floor_ptr;
-	void	*paw_ptr;
-	void	*wall_ptr;
-	void	*flower_ptr;
-	void	*lover_ptr;
-	void	*fluffy_love_ptr;
 
-	int		cat_x;
-	int		cat_y;
-	int		collected;
-	int		moves;
 }	t_data;
 
 /* *****************************   CONSTANTS   ********************************/

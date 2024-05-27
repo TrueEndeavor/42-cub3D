@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:22:29 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 16:22:58 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/23 17:48:58 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	parse_int(char **str)
 {
 	int	num;
 
-	num = -1;
+	num = 0;
 	while (**str >= '0' && **str <= '9')
 	{
 		num = num * 10 + (**str - '0');

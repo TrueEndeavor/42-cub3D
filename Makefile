@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/23 16:23:17 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/27 15:24:35 by rogalio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,18 +28,19 @@ LIBFT_DIR = ./include/libft_combined
 INCLUDES = -I./include -I$(LIBFT_DIR)/include -I./minilibx-linux
 
 SRCS			=	src/01main/cub3D.c \
-					src/02inputvalidation/arg_validation.c \
-					src/02inputvalidation/ext_validation.c	\
-					src/02inputvalidation/file_access_validation.c	\
-					src/03parsing/initialize_all.c \
-					src/03parsing/parse_scene_file.c	\
-					src/03parsing/parse_textures.c	\
-					src/03parsing/parse_colors.c	\
-					src/03parsing/parse_utils.c	\
-					src/03parsing/parse_utils1.c	\
-					src/07error/error_handling.c \
-					src/03parsing/load_map.c \
-					src/06destroy/destroy.c
+	#				src/02inputvalidation/arg_validation.c \
+	#				src/02inputvalidation/ext_validation.c	\
+	#				src/02inputvalidation/file_access_validation.c	\
+	#				src/03parsing/initialize_all.c \
+	#				src/03parsing/parse_scene_file.c	\
+	#				src/03parsing/parse_textures.c	\
+	#				src/03parsing/parse_colors.c	\
+	#				src/03parsing/parse_utils.c	\
+	#				src/03parsing/parse_utils1.c	\
+	#				src/03parsing/setup.c \
+	#				src/07error/error_handling.c \
+	#				src/03parsing/load_map.c \
+#			src/06destroy/destroy.c
 #					src/03structureinitialization/setup.c \
 #					src/04mapvalidation/validate_map.c \
 #					src/04mapvalidation/path.c \
@@ -48,7 +49,7 @@ SRCS			=	src/01main/cub3D.c \
 #					src/05moves/cat_movement.c \
 #					src/05moves/move_checks.c \
 #					src/05moves/winning_actions.c \
-					
+
 OBJS = $(SRCS:%.c=%.o)
 
 $(NAME): $(LIBFT_DIR)/$(LIBFTNAME) $(OBJS)
@@ -58,7 +59,7 @@ $(LIBFT_DIR)/$(LIBFTNAME):
 	make -C $(LIBFT_DIR)
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@ 
+	$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME) $(MLX)
 
