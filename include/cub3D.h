@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/27 14:28:35 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:16:11 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ typedef struct s_data
 	t_colors	colors;
 
 	t_list		*map;
+	int			map_height;
+	int			map_width;
 
 	void		*player_ptr;
 
@@ -126,10 +128,10 @@ typedef struct s_data
 /* *****************************   CONSTANTS   ********************************/
 
 # define PIXELS 64
-# define MAX_HEIGHT 15
+/* # define MAX_HEIGHT 15
 # define MAX_WIDTH 30
 # define MIN_HEIGHT 3
-# define MIN_WIDTH 3
+# define MIN_WIDTH 3 */
 
 /* *************************   INPUT VALIDATION   ****************************/
 void	init_data(t_data *data);
@@ -149,7 +151,8 @@ bool	texture_files_exist(t_textures *textures);
 bool	colors_are_valid(t_colors *colors);
 bool	colors_have_valid_rgb(t_colors *colors);
 int		check_textures_and_colors(t_data *data, bool tex_flag, bool col_flag);
-
+int		check_map_size(t_data *data);
+int		set_dup_map(t_data *data);
 /* *************************   PARSING UTILS  ****************************/
 void	trim_whitespace(char **line);
 char	*trim_newline(char *str);

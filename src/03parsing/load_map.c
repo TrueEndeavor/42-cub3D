@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:07:20 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 13:22:45 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:55:28 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	load_map(t_data *data, char *line)
 	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 		return (0);
+	//printf("line = %s\n", line);
+	if (ft_strcmp(line, "\n") == 0)
+		display_error("Invalid char in map");
 	new->content = ft_strdup(line);
 	if (!new->content)
 		return (0);

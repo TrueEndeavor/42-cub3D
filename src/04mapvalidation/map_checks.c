@@ -6,30 +6,23 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 09:47:03 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:06:00 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "cub3D.h"
 
-int	check_rectangle(t_data *data)
+int	check_map_size(t_data *data)
 {
-	t_list	*current;
-
-	current = data->map;
-	while (current)
+	if (ft_lstsize(data->map) < 3)
 	{
-		if ((ft_strlen((char *)current->content)) != (size_t) data->win_width)
-		{
-			display_error("Map is not rectangular");
-			return (0);
-		}
-		current = current->next;
+		display_error("The map size is too small");
+		return (0);
 	}
 	return (1);
 }
 
-int	check_size(t_data *data)
+/* int	check_size(t_data *data)
 {
 	if (data->win_height < MIN_HEIGHT || data->win_width < MIN_WIDTH
 		|| data->win_width > MAX_WIDTH || data->win_height > MAX_HEIGHT)
@@ -38,7 +31,7 @@ int	check_size(t_data *data)
 		return (0);
 	}
 	return (1);
-}
+} */
 
 int	check_chars(t_data *data)
 {
@@ -52,12 +45,13 @@ int	check_chars(t_data *data)
 	while (current)
 	{
 		i = 0;
-		c = ((char *)current->content)[i];
-		while (c != '\0' && i < data-> width)
+		while (((char *)current->content)[i] != '\0')
 		{
 			c = ((char *)current->content)[i];
-			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
+			if (c != '0' && c != '1' && c != 'N' && c != 'E' && \
+				c != 'S' && c != 'W' && c != ' ' && c != '\n')
 			{
+				//printf("this is where the char is WRONG = ..%d.. , ..%d..\n", c, (c == '\n'));
 				display_error("Invalid char in map");
 				return (0);
 			}
@@ -68,36 +62,95 @@ int	check_chars(t_data *data)
 	}
 	return (1);
 }
-
+/* 
 int	check_walls(t_data *data)
 {
-	t_list	*current;
 	int		x;
 	int		y;
 
-	current = data->map;
 	y = 0;
-	while (current)
+	if (set_dup_map(data))
 	{
-		if (y == 0 || y == (data->win_height - 1))
+		for (int i = 0; i < data->map_height; i++)
 		{
+			printf("%s\n", data->dup_map[i]);
+		}
+	}
+	for (y = 0; y < data->map_height; y++)
+	{
+			printf("checkcoucou: y=%d\n", y);
 			x = 0;
-			while (((char *)current->content)[x] != '\0' && x < data-> width)
+		if (y == 0 || y == (data->map_height - 1))
+		{
+			while (data->dup_map[y][x] != '\0')
 			{
-				if (((char *)current->content)[x] != '1')
+				printf("current char= %c\n", (data->dup_map[y][x]));
+				if (data->dup_map[y][x] != '1' && data->dup_map[y][x] != 'V')
 					return (0);
 				x++;
 			}
 		}
-		if (((char *)current->content)[0] != '1'
-			|| ((char *)current->content)[data->win_width - 1] != '1')
+		else if ((data->dup_map[y][x] != '1' && data->dup_map[y][x] != 'V') || \
+			((data->dup_map[y][(ft_strlen(data->dup_map[y])) - 1] != '1') && (data->dup_map[y][(ft_strlen(data->dup_map[y])-1)] != 'V')))
+			return (0); 
+		//y++;
+		printf("\next line");
+		printf("\n");
+	}
+	return (1);
+} */
+
+int	check_outer_enclosure(t_data *data, int i, int j)
+{
+	//printf("line = %i %s\n", i, data->dup_map[i]);
+	if (!data->dup_map || !data->dup_map[i] || !data->dup_map[i][j])
+		return (0);
+	while (ft_iswhitespace(data->dup_map[i][j]))
+		j++;
+	while (data->dup_map[i][j])
+	{
+		if (data->dup_map[i][j] == 'N' || \
+			data->dup_map[i][j] == 'E' || \
+			data->dup_map[i][j] == 'S' || \
+			data->dup_map[i][j] == 'W')
+			return (2);
+		else if (data->dup_map[i][j] != '1')
 			return (0);
-		current = current->next;
-		y++;
+		j++;
 	}
 	return (1);
 }
 
+int	check_walls(t_data *data)
+{
+	int	i;
+	int	j;
+	int	status;
+
+	set_dup_map(data);
+	status = check_outer_enclosure(data, 0, 0);
+	if (status != 1)
+		return (status);
+	i = 1;
+	while (i < (data->map_height - 1))
+	{
+		j = ft_strlen(data->dup_map[i]) - 1;
+		if (data->dup_map[i][j] == 'N' || \
+			data->dup_map[i][j] == 'E' || \
+			data->dup_map[i][j] == 'S' || \
+			data->dup_map[i][j] == 'W')
+			return (2);
+		else if (data->dup_map[i][j] != '1')
+			return (0);
+		//printf("line = %i %s\n", i, data->dup_map[i]);
+		i++;
+	}
+	if (check_outer_enclosure(data, i, 0) == 0)
+		return (0);
+	return (1);
+}
+
+/*
 int	check_e_p_c_count(t_data *data)
 {
 	t_list	*current;
@@ -124,3 +177,4 @@ int	check_e_p_c_count(t_data *data)
 	}
 	return (1);
 }
+ */

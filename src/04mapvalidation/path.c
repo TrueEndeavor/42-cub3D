@@ -6,61 +6,31 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:10:26 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 09:46:52 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:19:30 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "cub3D.h"
 
-int	check_flood_fill(t_data *data)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (data->dup_map[j])
-	{
-		i = 0;
-		while (data->dup_map[j][i])
-		{
-			if (data->dup_map[j][i] == 'E')
-			{
-				display_error("Exit not reachable");
-				return (0);
-			}
-			if (data->dup_map[j][i] == 'C')
-			{
-				display_error("Collectible not reachable");
-				return (0);
-			}
-			i++;
-		}
-		j++;
-	}
-	return (1);
-}
-
-int	flood_fill(int x, int y, t_data *data, char target)
-{
-	if (data->dup_map[y][x] == '1' || data->dup_map[y][x] == 'V')
-		return (0);
-	if (data->dup_map[y][x] == target)
-	{
-		data->dup_map[y][x] = '1';
-		return (0);
-	}
-	data->dup_map[y][x] = 'V';
-	return ((flood_fill(x, y - 1, data, target) \
-		|| flood_fill(x, y + 1, data, target) \
-		|| flood_fill(x - 1, y, data, target) \
-		|| flood_fill(x + 1, y, data, target)));
-}
-
+/* 
 int	set_dup_map(t_data *data)
 {
 	int		i;
+	int		j;
+	int		max_width;
 	t_list	*current;
 
+	max_width = 0;
+	i = 0;
+	j = 0;
+	current = data->map;
+	while (current)
+	{
+		if ((int)ft_strlen(current->content) > max_width)
+			max_width = ft_strlen(current->content);
+		current = current->next;
+	}
+	data->map_width = max_width;
 	data->dup_map = ft_calloc((data->win_height + 1), sizeof(char *));
 	if (!data->dup_map)
 	{
@@ -76,13 +46,34 @@ int	set_dup_map(t_data *data)
 		{
 			display_error("Could not duplicate map");
 			return (0);
+		
 		}
+		int map_area_started = 0;
+		j = 0;
+		while (j < max_width)
+		{
+			if (j < (int)ft_strlen(data->dup_map[i]))
+			{
+				if (data->dup_map[i][j] == '1')
+					map_area_started = 1;
+				if (data->dup_map[i][j] == ' ')
+					if (map_area_started)
+						data->dup_map[i][j] = '0';
+					else
+						data->dup_map[i][j] = 'V';
+			}
+			else
+				data->dup_map[i][j] = 'V';
+			j++;
+		}
+		data->dup_map[i][max_width] = '\0';
 		i++;
 		current = current->next;
 	}
 	return (1);
-}
+} */
 
+/*
 int	find_player_position(t_data *data)
 {
 	int	i;
@@ -106,29 +97,41 @@ int	find_player_position(t_data *data)
 		j++;
 	}
 	return (0);
-}
+} */
 
-int	check_valid_path(t_data *data)
+int	set_dup_map(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_list	*current;
 
-	find_player_position(data);
-	flood_fill(data->start_x, data->start_y, data, 'E');
-	j = 0;
-	while (data->dup_map[j])
+	data->dup_map = ft_calloc((data->map_height + 1), sizeof(char *));
+	if (!data->dup_map)
 	{
-		i = 0;
-		while (data->dup_map[j][i])
-		{
-			if (data->dup_map[j][i] == 'V')
-				data->dup_map[j][i] = '0';
-			i++;
-		}
-		j++;
-	}
-	flood_fill(data->start_x, data->start_y, data, 'C');
-	if (!check_flood_fill(data))
+		display_error("Could not duplicate map");
 		return (0);
+	}
+	i = 0;
+	current = data->map;
+	while (current)
+	{
+		data->dup_map[i] = ft_strdup(current->content);
+		if (!data->dup_map[i])
+		{
+			display_error("Could not duplicate map");
+			return (0);
+		}
+		j = 0;
+		while (ft_iswhitespace(data->dup_map[i][j]))
+			j++;
+		while (data->dup_map[i][++j])
+		{
+			if (data->dup_map[i][j] == ' '
+				&& j != data->dup_map[i][ft_strlen(data->dup_map[i]) - 1])
+				data->dup_map[i][j] = '1';
+		}
+		i++;
+		current = current->next;
+	}
 	return (1);
 }

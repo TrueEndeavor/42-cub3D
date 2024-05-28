@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 16:12:18 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 09:39:19 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_data(t_data *data)
 	data->win_ptr = NULL;
 	data->win_height = WIN_HEIGHT;
 	data->win_width = WIN_WIDTH;
+	data->map_height = 0;
 	init_all_texures(&data->textures);
 	init_all_colors(&data->colors);
 	data->map = NULL;

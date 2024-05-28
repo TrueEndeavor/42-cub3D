@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/27 11:30:58 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 09:13:38 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	main(int ac, char **av)
 	if (!check_cub_extension(av[1]))
 		on_destroy(&data);
 	parse_scene_file(&data, av[1]);
-/*	if (!validate_map(&data))
+	if (!validate_map(&data))
 		on_destroy(&data);
-	data.mlx_ptr = mlx_init();
+/*	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		on_destroy(&data);
 	if (!set_up(&data))

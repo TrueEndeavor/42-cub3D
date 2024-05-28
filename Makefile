@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/27 11:27:41 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/28 10:09:17 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,14 +38,14 @@ SRCS			=	src/01main/cub3D.c \
 					src/03parsing/parse_colors.c	\
 					src/03parsing/parse_utils.c	\
 					src/03parsing/parse_utils1.c	\
+					src/04mapvalidation/validate_map.c \
+					src/04mapvalidation/map_checks.c \
 					src/07error/error_handling.c \
 					src/03parsing/load_map.c \
 					src/dev/print_debug.c	\
+					src/04mapvalidation/path.c \
 					src/06destroy/destroy.c
 #					src/03structureinitialization/setup.c \
-#					src/04mapvalidation/validate_map.c \
-#					src/04mapvalidation/path.c \
-#					src/04mapvalidation/map_checks.c \
 #					src/05moves/events.c \
 #					src/05moves/cat_movement.c \
 #					src/05moves/move_checks.c \
