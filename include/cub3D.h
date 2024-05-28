@@ -6,7 +6,7 @@
 /*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 19:17:16 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/05/27 17:47:04 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct RGB_STRUCT
 	int			blue;
 }	t_rgb;
 
+
+/*
 typedef struct TEXTURE_ELEMENT
 {
 	char		*north_texture;
@@ -70,7 +72,38 @@ typedef struct TEXTURE_ELEMENT
 	char		*west_texture;
 	int			we_count;
 }	t_textures;
+*/
 
+typedef struct TEXTURE_ELEMENT
+{
+    char    *north_texture;
+    void    *north_img;
+    int     *north_data;
+    int     north_width;
+    int     north_height;
+    int     no_count;
+
+    char    *east_texture;
+    void    *east_img;
+    int     *east_data;
+    int     east_width;
+    int     east_height;
+    int     ea_count;
+
+    char    *south_texture;
+    void    *south_img;
+    int     *south_data;
+    int     south_width;
+    int     south_height;
+    int     so_count;
+
+    char    *west_texture;
+    void    *west_img;
+    int     *west_data;
+    int     west_width;
+    int     west_height;
+    int     we_count;
+}   t_textures;
 typedef struct COLORS
 {
 	t_rgb	floor;
