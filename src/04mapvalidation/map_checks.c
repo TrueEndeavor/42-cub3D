@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 14:06:00 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:27:06 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_chars(t_data *data)
 			if (c != '0' && c != '1' && c != 'N' && c != 'E' && \
 				c != 'S' && c != 'W' && c != ' ' && c != '\n')
 			{
-				//printf("this is where the char is WRONG = ..%d.. , ..%d..\n", c, (c == '\n'));
+				printf("this is where the char is WRONG = ..%d.. , ..%d..\n", c, (c == '\n'));
 				display_error("Invalid char in map");
 				return (0);
 			}
@@ -102,7 +102,6 @@ int	check_walls(t_data *data)
 
 int	check_outer_enclosure(t_data *data, int i, int j)
 {
-	//printf("line = %i %s\n", i, data->dup_map[i]);
 	if (!data->dup_map || !data->dup_map[i] || !data->dup_map[i][j])
 		return (0);
 	while (ft_iswhitespace(data->dup_map[i][j]))
@@ -130,23 +129,33 @@ int	check_walls(t_data *data)
 	set_dup_map(data);
 	status = check_outer_enclosure(data, 0, 0);
 	if (status != 1)
+	{
 		return (status);
+	}
 	i = 1;
 	while (i < (data->map_height - 1))
 	{
-		j = ft_strlen(data->dup_map[i]) - 1;
-		if (data->dup_map[i][j] == 'N' || \
-			data->dup_map[i][j] == 'E' || \
-			data->dup_map[i][j] == 'S' || \
-			data->dup_map[i][j] == 'W')
-			return (2);
-		else if (data->dup_map[i][j] != '1')
-			return (0);
-		//printf("line = %i %s\n", i, data->dup_map[i]);
+		j = (int)ft_strlen(data->dup_map[i]) - 1;
+		{
+			if (data->dup_map[i][j] == 'N' || \
+				data->dup_map[i][j] == 'E' || \
+				data->dup_map[i][j] == 'S' || \
+				data->dup_map[i][j] == 'W')
+				{
+				return (2);
+				}
+			else if (data->dup_map[i][j] != '1')
+			{
+				return (0);
+			}
+		}
 		i++;
 	}
-	if (check_outer_enclosure(data, i, 0) == 0)
-		return (0);
+	status = check_outer_enclosure(data, i, 0);
+	if (status != 1)
+	{
+		return (status);
+	}
 	return (1);
 }
 

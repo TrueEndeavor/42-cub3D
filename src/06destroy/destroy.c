@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:51:43 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/17 11:45:34 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:49:03 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,14 @@ void	free_maps(t_data *data)
 
 void	destroy_images(t_data *data)
 {
-	if (data->floor_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->floor_ptr);
-	if (data->paw_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->paw_ptr);
-	if (data->wall_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->wall_ptr);
-	if (data->player_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->player_ptr);
-	if (data->flower_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->flower_ptr);
-	if (data->lover_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->lover_ptr);
-	if (data->fluffy_love_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->fluffy_love_ptr);		
+	if (data->north_texture)
+		mlx_destroy_image(data->mlx_ptr, data->north_texture);
+	if (data->east_texture)
+		mlx_destroy_image(data->mlx_ptr, data->east_texture);
+	if (data->south_texture)
+		mlx_destroy_image(data->mlx_ptr, data->south_texture);
+	if (data->west_texture)
+		mlx_destroy_image(data->mlx_ptr, data->west_texture);
 }
 
 int	on_destroy(t_data *data)

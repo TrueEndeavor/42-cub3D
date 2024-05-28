@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 14:03:44 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:33:15 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	validate_map(t_data *data)
 {
 	int	status;
-	
+
 	if (!data->map)
 	{
 		display_error("Missing map info");
@@ -26,7 +26,7 @@ int	validate_map(t_data *data)
 	if (!check_chars(data))
 		return (0);
 	status = check_walls(data);
-	if (status != 1)
+	if (status == 0)
 	{
 		display_error("Map is not surrounded by walls");
 		return (0);
@@ -36,14 +36,5 @@ int	validate_map(t_data *data)
 		display_error("Player position on the edge");
 		return (0);
 	}
-	/*data->e_count = 0;
-	data->p_count = 0;
-	data->c_count = 0;
-	check_e_p_c_count(data);
-	if (data->c_count < 1 || data->e_count != 1 || data->p_count != 1)
-	{
-		display_error("Invalid exit, start position or collectible count");
-		return (0);
-	}*/
 	return (1);
 }

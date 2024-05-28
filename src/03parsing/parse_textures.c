@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 16:30:44 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:32:00 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	parse_textures(int direction, t_textures *textures, char *line)
 		get_texture(line, &textures->south_texture, &textures->so_count);
 	if (direction == WEST)
 		get_texture(line, &textures->west_texture, &textures->we_count);
-	//free(line);
-	/*free(textures.north_texture);
-	free(textures.east_texture);
-	free(textures.south_texture);
-	free(textures.west_texture);*/
 }
 
 void	parse_texture_line(char *line, t_textures *textures)

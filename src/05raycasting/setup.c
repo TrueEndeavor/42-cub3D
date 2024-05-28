@@ -6,11 +6,11 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:49:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/27 11:33:22 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:37:05 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "cub3D.h"
 
 void	set_player(t_data *data)
 {
@@ -42,22 +42,16 @@ void	set_player(t_data *data)
 
 void	init_images(t_data *data)
 {
-	data->floor_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/empty.xpm", &(data->win_width), &(data->win_height));
-	data->paw_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/paw.xpm", &(data->win_width), &(data->win_height));
-	data->flower_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/collectible.xpm", &(data->win_width), &(data->win_height));
-	data->lover_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/exit_3.xpm", &(data->win_width), &(data->win_height));
-	data->wall_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/wall.xpm", &(data->win_width), &(data->win_height));
-	data->player_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/player.xpm", &(data->win_width), &(data->win_height));
-	data->fluffy_love_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./assets/lover_4.xpm", &(data->win_width), &(data->win_height));
-	if (!data->floor_ptr || !data->paw_ptr || !data->flower_ptr
-		|| !data->lover_ptr || !data->wall_ptr || !data->player_ptr)
+	data->north_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
+		data->textures.north_texture, &(data->win_width), &(data->win_height));
+	data->east_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
+		data->textures.east_texture, &(data->win_width), &(data->win_height));
+	data->south_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
+		data->textures.south_texture, &(data->win_width), &(data->win_height));
+	data->west_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
+		data->textures.west_texture, &(data->win_width), &(data->win_height));
+	if (!data->north_texture || !data->east_texture || !data->south_texture
+		|| !data->west_texture)
 	{
 		display_error("Image not loaded");
 		on_destroy(data);
@@ -70,7 +64,7 @@ void	put_image_to_position(t_data *data, void *image_ptr, int x, int y)
 		image_ptr, x * PIXELS, y * PIXELS);
 }
 
-void	set_images(t_data *data)
+/* void	set_images(t_data *data)
 {
 	t_list	*current;
 	int		x;
@@ -96,13 +90,13 @@ void	set_images(t_data *data)
 		y++;
 		current = current->next;
 	}
-}
+} */
 
 int	set_up(t_data *data)
 {
 	data->win_ptr = mlx_new_window(data->mlx_ptr, \
-		data->win_width * PIXELS, data->win_height * PIXELS, \
-		" Purr-fect Petals Pursuit ");
+		data->win_width, data->win_height, \
+		"Raycaster");
 	if (!data->win_ptr)
 	{
 		display_error("Cannot open window");
@@ -110,9 +104,9 @@ int	set_up(t_data *data)
 		return (0);
 	}
 	init_images(data);
-	set_images(data);
-	set_player(data);
-	data->moves = 0;
-	data->collected = 0;
+	//set_images(data);
+	//set_player(data);
+	//data->moves = 0;
+	//data->collected = 0;
 	return (1);
 }

@@ -6,23 +6,23 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:13:51 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/17 11:45:07 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:55:52 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "cub3D.h"
 
 int	on_keypress(int keysym, t_data *data)
 {
 	(void)data;
 	if (keysym == XK_Left || keysym == XK_A || keysym == XK_a)
-		move_left(data);
+		printf("move_left(data)");
 	if (keysym == XK_Up || keysym == XK_W || keysym == XK_w)
-		move_up(data);
+		printf("move_up(data);");
 	if (keysym == XK_Right || keysym == XK_D || keysym == XK_d)
-		move_right(data);
+		printf("move_right(data);");
 	if (keysym == XK_Down || keysym == XK_S || keysym == XK_s)
-		move_down(data);
+		printf("move_down(data);");
 	if (keysym == XK_Escape || keysym == XK_Q || keysym == XK_q)
 		on_destroy(data);
 	return (0);

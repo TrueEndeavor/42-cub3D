@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 10:16:11 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:50:53 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,10 @@ typedef struct s_data
 	int		start_x;
 	int		start_y;
 
-	void	*floor_ptr;
-	void	*paw_ptr;
-	void	*wall_ptr;
-	void	*flower_ptr;
-	void	*lover_ptr;
-	void	*fluffy_love_ptr;
+	void	*north_texture;
+	void	*east_texture;
+	void	*south_texture;
+	void	*west_texture;
 
 	int		cat_x;
 	int		cat_y;
