@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:49:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 15:37:05 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:06:12 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,37 @@ void	set_player(t_data *data)
 	}
 }
 
+void	load_texture(t_data *data, char *tex_path, void **img, int **img_data)
+{
+	int	width;
+	int	height;
+
+	width = 0;
+	height = 0;
+	*img = mlx_xpm_file_to_image(data->mlx_ptr, tex_path, &width, &height);
+	*img_data = (int *)mlx_get_data_addr(*img, &(int){0}, &(int){0}, &(int){0});
+
+	if (!*img_data)
+	{
+		display_error("Image not loaded properly");
+		on_destroy(data);
+	}
+}
+
 void	init_images(t_data *data)
 {
-	data->north_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->textures.north_texture, &(data->win_width), &(data->win_height));
-	data->east_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->textures.east_texture, &(data->win_width), &(data->win_height));
-	data->south_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->textures.south_texture, &(data->win_width), &(data->win_height));
-	data->west_texture = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->textures.west_texture, &(data->win_width), &(data->win_height));
-	if (!data->north_texture || !data->east_texture || !data->south_texture
-		|| !data->west_texture)
+	load_texture(data, data->textures.east_texture, \
+		(void **)&data->textures.east_img, &data->textures.east_data);
+	load_texture(data, data->textures.north_texture, \
+		(void **)&data->textures.north_img, &data->textures.north_data);
+	load_texture(data, data->textures.south_texture, \
+		(void **)&data->textures.south_img, &data->textures.south_data);
+	load_texture(data, data->textures.west_texture, \
+		(void **)&data->textures.west_img, &data->textures.west_data);
+	if (!data->textures.north_data || !data->textures.east_data || \
+		!data->textures.south_data || !data->textures.west_data)
 	{
-		display_error("Image not loaded");
+		display_error("Images not loaded properly");
 		on_destroy(data);
 	}
 }
@@ -96,7 +113,7 @@ int	set_up(t_data *data)
 {
 	data->win_ptr = mlx_new_window(data->mlx_ptr, \
 		data->win_width, data->win_height, \
-		"Raycaster");
+		"Raycaster new");
 	if (!data->win_ptr)
 	{
 		display_error("Cannot open window");

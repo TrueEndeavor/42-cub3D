@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 15:30:24 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:01:56 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	parse_scene_file(t_data *data, char *scene_file)
 		free(line);
 		line = get_next_line(fd);
 	}
+
 	error_code = check_textures_and_colors(data, tex_flag, col_flag);
 	if (error_code != 0)
 	{

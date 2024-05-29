@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/28 15:34:54 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/29 15:11:58 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS			=	src/01main/cub3D.c \
 					src/03parsing/load_map.c \
 					src/dev/print_debug.c	\
 					src/04mapvalidation/duplicate_map.c \
+					src/04mapvalidation/valid_map_utils.c \
 					src/06destroy/destroy.c \
 					src/05raycasting/setup.c \
 					src/05raycasting/events.c \

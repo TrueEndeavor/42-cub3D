@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:44:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 18:14:53 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:02:46 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,42 @@ void	print_map(t_data *data)
 {
 	printf("\n****PRINT MAP****\n");
 	ft_lstiter(data->map, &print_content);
+}
+
+void	print_map_array(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	printf("\n****PRINT MAP CHAR ARRAY****\n");
+	while (data->dup_map[i] != NULL)
+	{
+		printf("%s\n", data->dup_map[i]);
+		i++;
+	}
+}
+
+void	print_map_int_array(t_data *data)
+{
+	int	i;
+	int	j;
+
+	printf("\n****PRINT MAP INT ARRAY****\n");
+	i = 0;
+	while (i < data->map_width)
+	{
+		j = 0;
+		while (j < data->map_height)
+		{
+			if (data->world_map[i][j] == 'N')
+				printf("N ");
+			else
+				printf("%d", data->world_map[i][j]);
+			j++;
+		}
+		i++;
+		printf("\n");
+	}
 }
 
 void	print_textures(t_data *data)

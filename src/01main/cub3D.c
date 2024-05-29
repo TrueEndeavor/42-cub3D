@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 14:50:19 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:03:21 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int ac, char **av)
 	parse_scene_file(&data, av[1]);
 	if (!validate_map(&data))
 		on_destroy(&data);
+	convert_to_intarray(&data);
+	print_map_int_array(&data);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		on_destroy(&data);
@@ -32,6 +34,8 @@ int	main(int ac, char **av)
 		on_destroy(&data);
 	}
 	mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
+	mlx_hook(data.win_ptr, MotionNotify, PointerMotionMask, &on_mouse, &data);
+	mlx_loop_hook(data.mlx_ptr, render, &data);
 	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask,
 		&on_destroy, &data);
 	mlx_loop(data.mlx_ptr);

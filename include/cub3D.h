@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 14:50:53 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:41:52 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,15 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "mlx.h"
-
+# include <math.h>
 # include <stdio.h> // to be deleted later
 
 /* *****************************   CONSTANTS   *******************************/
+#define mapWidth 24
+#define mapHeight 24
+#define screenWidth 640
+#define screenHeight 480
+
 # define NORTH 1
 # define EAST 2
 # define SOUTH 3
@@ -68,16 +73,36 @@ typedef struct RGB_STRUCT
 	int			blue;
 }	t_rgb;
 
+
 typedef struct TEXTURE_ELEMENT
 {
-	char		*north_texture;
-	int			no_count;
-	char		*east_texture;
-	int			ea_count;
-	char		*south_texture;
-	int			so_count;
-	char		*west_texture;
-	int			we_count;
+	char	*north_texture;
+	void	*north_img;
+	int		*north_data;
+	int		north_width;
+	int		north_height;
+	int		no_count;
+
+	char	*east_texture;
+	void	*east_img;
+	int		*east_data;
+	int		east_width;
+	int		east_height;
+	int		ea_count;
+
+	char	*south_texture;
+	void	*south_img;
+	int		*south_data;
+	int		south_width;
+	int		south_height;
+	int		so_count;
+
+	char	*west_texture;
+	void	*west_img;
+	int		*west_data;
+	int		west_width;
+	int		west_height;
+	int		we_count;
 }	t_textures;
 
 typedef struct COLORS
@@ -88,6 +113,19 @@ typedef struct COLORS
 	int		ceiling_count;
 }	t_colors;
 
+typedef struct s_game
+{
+	double	pos_x;
+	double	pos_y;
+	double	move_speed;
+	double	rot_speed;
+	double	mouserot_speedfactor;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_game;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -95,6 +133,8 @@ typedef struct s_data
 
 	int			win_height;
 	int			win_width;
+
+	t_game		game;
 
 	t_textures	textures;
 	t_colors	colors;
@@ -105,6 +145,7 @@ typedef struct s_data
 
 	void		*player_ptr;
 
+	int			**world_map;
 	char		**dup_map;
 	int		e_count;
 	int		p_count;
@@ -123,6 +164,7 @@ typedef struct s_data
 	int		moves;
 }	t_data;
 
+
 /* *****************************   CONSTANTS   ********************************/
 
 # define PIXELS 64
@@ -133,6 +175,7 @@ typedef struct s_data
 
 /* *************************   INPUT VALIDATION   ****************************/
 void	init_data(t_data *data);
+void	initialize_game(t_game *game);
 bool	check_args(int ac);
 bool	check_cub_extension(char *file_name);
 int		check_readable(t_data *data, char *scene_file);
@@ -160,13 +203,15 @@ int		is_map_line(char *line);
 int		parse_int(char **str);
 bool	check_xpm_extension(char *file_name);
 void	print_all(t_data *data);
+void	print_map_array(t_data *data);
 
 int		check_texture_file(char *file_name);
 
 int		load_map(t_data *data, char *line);
 
 int		validate_map(t_data *data);
-int		check_rectangle(t_data *data);
+void	convert_to_intarray(t_data *data);
+void	print_map_int_array(t_data *data);
 int		check_size(t_data *data);
 int		check_chars(t_data *data);
 int		check_walls(t_data *data);
@@ -177,6 +222,9 @@ int		check_valid_path(t_data *data);
 int		set_up(t_data *data);
 
 int		on_keypress(int keysym, t_data *data);
+int		on_mouse(int x, int y, t_data *data);
+int		render(t_data *data);
+
 void	move_left(t_data *data);
 void	move_right(t_data *data);
 void	move_up(t_data *data);
