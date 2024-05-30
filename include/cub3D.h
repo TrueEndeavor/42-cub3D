@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/29 15:41:52 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:02:55 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@
 # include <stdio.h> // to be deleted later
 
 /* *****************************   CONSTANTS   *******************************/
-#define mapWidth 24
-#define mapHeight 24
+
 #define screenWidth 640
 #define screenHeight 480
 
@@ -62,7 +61,6 @@
 # define ERR_COLOR_RGB_VALUES_MISSING 22
 
 # define ERR_MAP_POSITION_INVALID 31
-
 
 /* *****************************   STRUCTURES   *******************************/
 
@@ -211,7 +209,7 @@ int		load_map(t_data *data, char *line);
 
 int		validate_map(t_data *data);
 void	convert_to_intarray(t_data *data);
-void	print_map_int_array(t_data *data);
+void	print_map_int_array(int **int_map, int height, int width);
 int		check_size(t_data *data);
 int		check_chars(t_data *data);
 int		check_walls(t_data *data);

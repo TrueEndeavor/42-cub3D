@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/29 16:03:21 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:07:32 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int ac, char **av)
 	if (!validate_map(&data))
 		on_destroy(&data);
 	convert_to_intarray(&data);
-	print_map_int_array(&data);
+	printf("in main\n");
+	print_map_int_array(data.world_map, data.map_height, data.map_width);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		on_destroy(&data);

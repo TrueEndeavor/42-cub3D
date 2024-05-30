@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:44:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/29 16:02:46 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:21:59 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,23 @@ void	print_map_array(t_data *data)
 	}
 }
 
-void	print_map_int_array(t_data *data)
+void	print_map_int_array(int **int_map, int height, int width)
 {
 	int	i;
 	int	j;
 
 	printf("\n****PRINT MAP INT ARRAY****\n");
 	i = 0;
-	while (i < data->map_width)
+	while (i < height)
 	{
 		j = 0;
-		while (j < data->map_height)
+		while (j < width)
 		{
-			if (data->world_map[i][j] == 'N')
-				printf("N ");
+			//printf("data->world_map[%d][%d]=%d\n",i,j,int_map[i][j]);		
+			if (int_map[i][j] == 'N')
+				printf("N");
 			else
-				printf("%d", data->world_map[i][j]);
+				printf("%d", int_map[i][j]);
 			j++;
 		}
 		i++;

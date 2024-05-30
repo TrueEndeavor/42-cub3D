@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:49:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/29 16:06:12 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:27:02 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,10 @@ void	set_player(t_data *data)
 	}
 }
 
-void	load_texture(t_data *data, char *tex_path, void **img, int **img_data)
+/* void	load_texture(t_data *data, char *tex_path, void **img, int **img_data)
 {
-	int	width;
-	int	height;
-
-	width = 0;
-	height = 0;
-	*img = mlx_xpm_file_to_image(data->mlx_ptr, tex_path, &width, &height);
+	
+	*img = mlx_xpm_file_to_image(data->mlx_ptr, tex_path, &data->textures.east_width, &data->textures.east_height);
 	*img_data = (int *)mlx_get_data_addr(*img, &(int){0}, &(int){0}, &(int){0});
 
 	if (!*img_data)
@@ -55,18 +51,21 @@ void	load_texture(t_data *data, char *tex_path, void **img, int **img_data)
 		display_error("Image not loaded properly");
 		on_destroy(data);
 	}
-}
+} */
 
 void	init_images(t_data *data)
 {
-	load_texture(data, data->textures.east_texture, \
-		(void **)&data->textures.east_img, &data->textures.east_data);
-	load_texture(data, data->textures.north_texture, \
-		(void **)&data->textures.north_img, &data->textures.north_data);
-	load_texture(data, data->textures.south_texture, \
-		(void **)&data->textures.south_img, &data->textures.south_data);
-	load_texture(data, data->textures.west_texture, \
-		(void **)&data->textures.west_img, &data->textures.west_data);
+	 data->textures.east_img = mlx_xpm_file_to_image(data->mlx_ptr, data->textures.east_texture, &data->textures.east_width, &data->textures.east_height);
+    data->textures.east_data = (int *)mlx_get_data_addr(data->textures.east_img, &data->textures.ea_count, &data->textures.ea_count, &data->textures.ea_count);
+
+    data->textures.north_img = mlx_xpm_file_to_image(data->mlx_ptr, data->textures.north_texture, &data->textures.north_width, &data->textures.north_height);
+    data->textures.north_data = (int *)mlx_get_data_addr(data->textures.north_img, &data->textures.no_count, &data->textures.no_count, &data->textures.no_count);
+
+    data->textures.south_img = mlx_xpm_file_to_image(data->mlx_ptr, data->textures.south_texture, &data->textures.south_width, &data->textures.south_height);
+    data->textures.south_data = (int *)mlx_get_data_addr(data->textures.south_img, &data->textures.so_count, &data->textures.so_count, &data->textures.so_count);
+
+    data->textures.west_img = mlx_xpm_file_to_image(data->mlx_ptr, data->textures.west_texture, &data->textures.west_width, &data->textures.west_height);
+    data->textures.west_data = (int *)mlx_get_data_addr(data->textures.west_img, &data->textures.we_count, &data->textures.we_count, &data->textures.we_count);
 	if (!data->textures.north_data || !data->textures.east_data || \
 		!data->textures.south_data || !data->textures.west_data)
 	{
