@@ -6,13 +6,13 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:49:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/30 10:27:02 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:43:04 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	set_player(t_data *data)
+/* void	set_player(t_data *data)
 {
 	t_list	*current;
 	int		x;
@@ -38,7 +38,7 @@ void	set_player(t_data *data)
 		y++;
 		current = current->next;
 	}
-}
+} */
 
 /* void	load_texture(t_data *data, char *tex_path, void **img, int **img_data)
 {
@@ -74,11 +74,11 @@ void	init_images(t_data *data)
 	}
 }
 
-void	put_image_to_position(t_data *data, void *image_ptr, int x, int y)
+/* void	put_image_to_position(t_data *data, void *image_ptr, int x, int y)
 {
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
 		image_ptr, x * PIXELS, y * PIXELS);
-}
+} */
 
 /* void	set_images(t_data *data)
 {

@@ -1,15 +1,15 @@
 NO textures/wolfenstein/blue_stone.xpm
-EA textures/wolfenstein/blue_stone.xpm
-SO textures/wolfenstein/blue_stone.xpm
-WE textures/wolfenstein/blue_stone.xpm
+EA textures/wolfenstein/color_stone.xpm
+SO textures/wolfenstein/grey_stone.xpm
+WE textures/wolfenstein/purple_stone.xpm
 
-C 153,204,255
-F 164,169,20
+C 35,19,73
+F 15,6,40
 
 111111111111111111111
 101000001000000000001
 101010101011111110001
-100010100010000010001
+1111000N1010000010001
 111110101111101011101
 100000101000101000001
 101111101011101111111

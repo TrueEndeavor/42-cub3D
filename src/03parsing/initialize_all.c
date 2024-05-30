@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/30 09:25:25 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:12:53 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	init_data(t_data *data)
 
 void	initialize_game(t_game *game)
 {
-	game->pos_x = 9;
-	game->pos_y = 9;
+	game->pos_x = 3;
+	game->pos_y = 2;
 	game->move_speed = 0.6;
 	game->rot_speed = 0.3;
 	game->mouserot_speedfactor = 0.005;
