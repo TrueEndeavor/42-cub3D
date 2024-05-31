@@ -6,7 +6,7 @@
 /*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 15:33:02 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/05/31 18:03:21 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,27 @@ typedef struct s_game
 	double	plane_y;
 }	t_game;
 
+typedef struct s_ray
+{
+    double cameraX;
+    double rayDirX;
+    double rayDirY;
+    int mapX;
+    int mapY;
+    double sideDistX;
+    double sideDistY;
+    double deltaDistX;
+    double deltaDistY;
+    double perpWallDist;
+    int stepX;
+    int stepY;
+    int side;
+    int lineHeight;
+    int drawStart;
+    int drawEnd;
+} t_ray;
+
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -224,8 +245,12 @@ int		on_keypress(int keysym, t_data *data);
 int		on_mouse(int x, int y, t_data *data);
 int		render(t_data *data);
 
-void	move_left(t_data *data, double move_speed);
-void	move_right(t_data *data, double move_speed);
+void rotate_left(t_data *data, double rot_speed);
+void rotate_right(t_data *data, double rot_speed);
+void draw_wall(t_data *data, int x, t_ray *ray, int *img_data);
+void calculate_wall_parameters(t_data *data, t_ray *ray);
+void detect_walls(t_data *data, t_ray *ray);
+void calculate_ray_parameters(t_data *data, int x, t_ray *ray);
 void	move_up(t_data *data, double move_speed);
 void	move_down(t_data *data, double move_speed);
 char	check_next_move(t_data *data, int x, int y);

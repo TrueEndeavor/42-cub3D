@@ -6,7 +6,7 @@
 #    By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/31 15:16:07 by rogalio          ###   ########.fr        #
+#    Updated: 2024/05/31 18:00:41 by rogalio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,10 @@ SRCS			=	src/01main/cub3D.c \
 					src/06destroy/destroy.c \
 					src/05raycasting/setup.c \
 					src/05raycasting/events.c \
+					src/05raycasting/render.c \
+					src/05raycasting/raycasting.c \
+					src/05raycasting/move.c \
+					src/05raycasting/draw.c
 
 OBJS_DIR = obs
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
