@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 11:08:09 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:33:02 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,10 +224,10 @@ int		on_keypress(int keysym, t_data *data);
 int		on_mouse(int x, int y, t_data *data);
 int		render(t_data *data);
 
-void	move_left(t_data *data);
-void	move_right(t_data *data);
-void	move_up(t_data *data);
-void	move_down(t_data *data);
+void	move_left(t_data *data, double move_speed);
+void	move_right(t_data *data, double move_speed);
+void	move_up(t_data *data, double move_speed);
+void	move_down(t_data *data, double move_speed);
 char	check_next_move(t_data *data, int x, int y);
 void	check_collected(t_data *data, int x, int y);
 

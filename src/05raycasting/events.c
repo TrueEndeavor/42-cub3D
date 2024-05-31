@@ -3,48 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:13:51 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/30 17:08:49 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:30:56 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	on_keypress(int key, t_data *data)
+
+
+void move_up(t_data *data, double move_speed)
 {
-   (void)data;
+    if (data->world_map[(int)(data->game.pos_x + data->game.dir_x * move_speed)][(int)data->game.pos_y] == 0)
+        data->game.pos_x += data->game.dir_x * move_speed;
+    if (data->world_map[(int)data->game.pos_x][(int)(data->game.pos_y + data->game.dir_y * move_speed)] == 0)
+        data->game.pos_y += data->game.dir_y * move_speed;
+}
+
+void move_down(t_data *data, double move_speed)
+{
+    if (data->world_map[(int)(data->game.pos_x - data->game.dir_x * move_speed)][(int)data->game.pos_y] == 0)
+        data->game.pos_x -= data->game.dir_x * move_speed;
+    if (data->world_map[(int)data->game.pos_x][(int)(data->game.pos_y - data->game.dir_y * move_speed)] == 0)
+        data->game.pos_y -= data->game.dir_y * move_speed;
+}
+
+void rotate_left(t_data *data, double rot_speed)
+{
+    double oldDirX = data->game.dir_x;
+    data->game.dir_x = data->game.dir_x * cos(rot_speed) - data->game.dir_y * sin(rot_speed);
+    data->game.dir_y = oldDirX * sin(rot_speed) + data->game.dir_y * cos(rot_speed);
+    double oldPlaneX = data->game.plane_x;
+    data->game.plane_x = data->game.plane_x * cos(rot_speed) - data->game.plane_y * sin(rot_speed);
+    data->game.plane_y = oldPlaneX * sin(rot_speed) + data->game.plane_y * cos(rot_speed);
+}
+
+void rotate_right(t_data *data, double rot_speed)
+{
+    double oldDirX = data->game.dir_x;
+    data->game.dir_x = data->game.dir_x * cos(-rot_speed) - data->game.dir_y * sin(-rot_speed);
+    data->game.dir_y = oldDirX * sin(-rot_speed) + data->game.dir_y * cos(-rot_speed);
+    double oldPlaneX = data->game.plane_x;
+    data->game.plane_x = data->game.plane_x * cos(-rot_speed) - data->game.plane_y * sin(-rot_speed);
+    data->game.plane_y = oldPlaneX * sin(-rot_speed) + data->game.plane_y * cos(-rot_speed);
+}
+
+int on_keypress(int key, t_data *data)
+{
     double moveSpeed = 0.6; // Vitesse de déplacement
     double rotSpeed = 0.3;  // Vitesse de rotation
 
-    if (key == 65307) { // Touche Échap
+    if (key == 65307) // Touche Échap
         exit(0);
-    }
-    if (key == 119) { // Touche W
-        if(data->world_map[(int)(data->game.pos_x +  data->game.dir_x * moveSpeed)][(int)data->game.pos_y] == 0) data->game.pos_x +=  data->game.dir_x * moveSpeed;
-        if(data->world_map[(int)data->game.pos_x][(int)(data->game.pos_y + data->game.dir_y * moveSpeed)] == 0) data->game.pos_y += data->game.dir_y * moveSpeed;
-    }
-    if (key == 115) { // Touche S
-        if(data->world_map[(int)(data->game.pos_x -  data->game.dir_x * moveSpeed)][(int)data->game.pos_y] == 0) data->game.pos_x -=  data->game.dir_x * moveSpeed;
-        if(data->world_map[(int)data->game.pos_x][(int)(data->game.pos_y - data->game.dir_y * moveSpeed)] == 0) data->game.pos_y -= data->game.dir_y * moveSpeed;
-    }
-    if (key == 97) { // Touche A
-        double oldDirX =  data->game.dir_x;
-         data->game.dir_x =  data->game.dir_x * cos(rotSpeed) - data->game.dir_y * sin(rotSpeed);
-        data->game.dir_y = oldDirX * sin(rotSpeed) + data->game.dir_y * cos(rotSpeed);
-        double oldPlaneX = data->game.plane_x;
-        data->game.plane_x = data->game.plane_x * cos(rotSpeed) - data->game.plane_y * sin(rotSpeed);
-        data->game.plane_y = oldPlaneX * sin(rotSpeed) + data->game.plane_y * cos(rotSpeed);
-    }
-    if (key == 100) { // Touche D
-        double oldDirX =  data->game.dir_x;
-         data->game.dir_x =  data->game.dir_x * cos(-rotSpeed) - data->game.dir_y * sin(-rotSpeed);
-        data->game.dir_y = oldDirX * sin(-rotSpeed) + data->game.dir_y * cos(-rotSpeed);
-        double oldPlaneX = data->game.plane_x;
-        data->game.plane_x = data->game.plane_x * cos(-rotSpeed) - data->game.plane_y * sin(-rotSpeed);
-        data->game.plane_y = oldPlaneX * sin(-rotSpeed) + data->game.plane_y * cos(-rotSpeed);
-    }
+    if (key == 119) // Touche W
+        move_up(data, moveSpeed);
+    if (key == 115) // Touche S
+        move_down(data, moveSpeed);
+    if (key == 97) // Touche A
+        rotate_left(data, rotSpeed);
+    if (key == 100) // Touche D
+        rotate_right(data, rotSpeed);
     return 0;
 }
 
