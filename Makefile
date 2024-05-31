@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/30 17:02:34 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/05/31 18:00:41 by rogalio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,18 +49,23 @@ SRCS			=	src/01main/cub3D.c \
 					src/06destroy/destroy.c \
 					src/05raycasting/setup.c \
 					src/05raycasting/events.c \
+					src/05raycasting/render.c \
+					src/05raycasting/raycasting.c \
+					src/05raycasting/move.c \
+					src/05raycasting/draw.c
 
-					
-OBJS = $(SRCS:%.c=%.o)
+OBJS_DIR = obs
+OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
 
 $(NAME): $(LIBFT_DIR)/$(LIBFTNAME) $(OBJS)
-	$(CC) $(CCFLAGS) $(SRCS) $(LIBFT_DIR)/$(LIBFTNAME) $(INCLUDES) -o ${NAME} $(MLX_FLAGS)
+	$(CC) $(CCFLAGS) $(OBJS) $(LIBFT_DIR)/$(LIBFTNAME) $(INCLUDES) -o ${NAME} $(MLX_FLAGS)
 
 $(LIBFT_DIR)/$(LIBFTNAME):
 	make -C $(LIBFT_DIR)
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@ 
+$(OBJS_DIR)/%.o: src/%.c $(HEADERS)
+	mkdir -p $(dir $@)
+	$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME) $(MLX)
 
@@ -81,3 +86,4 @@ vtest: ${NAME}
 	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
 
 .PHONY: all clean fclean re test vtest
+
