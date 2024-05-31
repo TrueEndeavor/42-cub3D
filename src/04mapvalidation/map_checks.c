@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 10:52:38 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:45:31 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,24 +152,22 @@ int is_column_enclosed(t_data *data, int col)
 	i = 0;
 	top_wall = 0;
 	bottom_wall = 0;
-	//printf("\nCOLUMN = %d\n", col);
-	while (i < data->map_height && data->dup_map[i][col] == ' ')
+	while (i < data->map_height && (data->dup_map[i][col] == ' ' || data->dup_map[i][col] == '\0'))
 	{
-		//printf("skipping i=%d\n", i);
 		i++;
 	}
+	//printf("CURRENTLY IN COLUMN 🍓 %d, i=%d\n", col, i);
 	if (i < data->map_height && data->dup_map[i][col] == '1')
 	{
-		//printf("..data->dup_map[%d][%d] = %c\n", i, col, data->dup_map[i][col]);
+		//printf("top wall found at col,row = %d, %d\n", col, i);
 		top_wall = 1;
 	}
 	i = data->map_height - 1;
-	//printf("data->map_height= %d \n..checking column bottom i = %d\n", data->map_height, i);
-	while (i >= 0 && data->dup_map[i][col] == ' ')
+	while (i >= 0 && (data->dup_map[i][col] == ' ' || data->dup_map[i][col] == '\0'))
 		i--;
 	if (i >= 0 && data->dup_map[i][col] == '1')
 	{
-		//printf("..data->dup_map[%d][%d] = %c\n", i, col, data->dup_map[i][col]);
+		//printf("bottom wall found at col,row = %d, %d\n", col, i);
 		bottom_wall = 1;
 	}
 	return (top_wall && bottom_wall);
@@ -182,28 +180,37 @@ int	check_walls(t_data *data)
 	int	status;
 
 	set_dup_map(data);
+	
 	status = check_outer_enclosure(data, 0, 0);
 	if (status != 1)
 	{
+		//printf("status wrong after check_outer_enclosure\n");
 		return (status);
 	}
 	i = 1;
 	while (i < data->map_height - 1)
 	{
 		if (!is_row_enclosed(data->dup_map[i]))
+		{
+			//printf("status wrong after is_row_enclosed\n");
 			return (0);
+		}
 		i++;
 	}
 	j = 0;
 	while (j < data->map_width)
 	{
 		if (!is_column_enclosed(data, j))
+		{
+			//printf("status wrong after is_column_enclosed\n");
 			return 0;
+		}
 		j++;
 	}
 	status = check_outer_enclosure(data, i, 0);
 	if (status != 1)
 	{
+		//printf("status wrong after check_outer_enclosure\n");
 		return (status);
 	}
 	return (1);
