@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/30 17:16:29 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 09:31:33 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	validate_map(t_data *data)
 {
-	//int	status;
+	int	status;
 
 	if (!data->map)
 	{
@@ -26,7 +26,7 @@ int	validate_map(t_data *data)
 	if (!check_chars(data))
 		return (0);
 	set_dup_map(data);
-/* 	status = check_walls(data);
+	status = check_walls(data);
 	if (status == 0)
 	{
 		display_error("Map is not surrounded by walls");
@@ -36,6 +36,6 @@ int	validate_map(t_data *data)
 	{
 		display_error("Player position on the edge");
 		return (0);
-	} */
+	}
 	return (1);
 }
