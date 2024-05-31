@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/30 14:35:35 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 11:08:09 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ int		parse_int(char **str);
 bool	check_xpm_extension(char *file_name);
 void	print_all(t_data *data);
 void	print_map_array(t_data *data);
+void	print_textures(t_data *data);
 
 int		check_texture_file(char *file_name);
 

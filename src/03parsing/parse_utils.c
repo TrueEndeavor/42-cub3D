@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:32:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/28 12:27:13 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 11:31:43 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 void	trim_whitespace(char **line)
 {
-	while (ft_iswhitespace(**line) && **line != '\n')
+	char	*end;
+
+	while (ft_iswhitespace((unsigned char)**line))
 	{
 		(*line)++;
 	}
+	if (*line[0] == '\0')
+		return ;
+	end = *line + strlen(*line) - 1;
+	while (end > *line && ft_iswhitespace((unsigned char)*end))
+		end--;
+	end[1] = '\0';
 }
 
 char	*trim_newline(char *str)
@@ -34,6 +42,8 @@ char	*trim_newline(char *str)
 
 int	is_texture_line(char *line)
 {
+	while (*line && ft_iswhitespace((unsigned char)*line))
+		line++;
 	return (ft_strncmp(line, "NO", 2) == 0 || \
 			ft_strncmp(line, "EA", 2) == 0 || \
 			ft_strncmp(line, "SO", 2) == 0 || \
@@ -42,6 +52,8 @@ int	is_texture_line(char *line)
 
 int	is_color_line(char *line)
 {
+	while (*line && ft_iswhitespace((unsigned char)*line))
+		line++;
 	return (ft_strncmp(line, "C", 1) == 0 || ft_strncmp(line, "F", 1) == 0);
 }
 

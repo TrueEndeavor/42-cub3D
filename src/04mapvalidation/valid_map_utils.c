@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:05:12 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 09:30:18 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:54:04 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	convert_to_intarray(t_data *data)
 	}
 
 	i = 0;
-	print_map_array(data);
+	//print_map_array(data);
 	while (i < data->map_height)
 	{
 		if (data->dup_map[i] == NULL)
@@ -55,6 +55,6 @@ void	convert_to_intarray(t_data *data)
 		printf("\n");
 		i++;
 	}
-	printf("after world map creation\n");
-	print_map_int_array(data->world_map, data->map_height, data->map_width);
+	//printf("after world map creation\n");
+	//print_map_int_array(data->world_map, data->map_height, data->map_width);
 }

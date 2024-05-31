@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 10:36:48 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 11:25:27 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,31 +89,29 @@ void	parse_scene_file(t_data *data, char *scene_file)
 		}
 		if (map_flag)
 		{
-			if (ft_strlen(line) == 0)
-				empty_line_count++;
-			else
-				empty_line_count = 0;
-
-			if (empty_line_count > 2) // Assuming more than 1 consecutive empty line signals the end of the map
-				break;
-
-			if (load_map(data, line))
+			if (is_map_line(line))
 			{
-				printf("line = %s\n", line);
-				fflush(stdout);
-				data->map_height++;
+				if (ft_strlen(line) > 0)
+				{
+					if (load_map(data, line))
+					{
+						data->map_height++;
+					}
+					else
+					{
+						on_destroy(data);
+						return ;
+					}
+				}
 			}
 			else
 			{
-				on_destroy(data);
-				return;
+				break ;
 			}
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("..........map height = %d................map_width = %d \n\n", data->map_height, data->map_width);
-	fflush(stdout);
 	error_code = check_textures_and_colors(data, tex_flag, col_flag);
 	if (error_code != 0)
 	{
