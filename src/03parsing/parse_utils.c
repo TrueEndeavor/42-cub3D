@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 11:32:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 11:31:43 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:01:27 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	trim_whitespace(char **line)
 	}
 	if (*line[0] == '\0')
 		return ;
-	end = *line + strlen(*line) - 1;
+	end = *line + ft_strlen(*line) - 1;
 	while (end > *line && ft_iswhitespace((unsigned char)*end))
 		end--;
 	end[1] = '\0';
@@ -59,6 +59,10 @@ int	is_color_line(char *line)
 
 int	is_map_line(char *line)
 {
+	if (*line == '\0')
+	{
+		return (0);
+	}
 	while (*line)
 	{
 		if (*line != ' ' && *line != '1' && *line != '0' && \

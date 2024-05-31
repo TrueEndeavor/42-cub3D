@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/23 16:30:09 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:28:35 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	get_color(char *line, int type, t_colors *colors)
 		colors->ceiling.blue = parse_int(&line);
 	if (type == FLOOR)
 		colors->floor.blue = parse_int(&line);
+	if (type == CEILING)
+		colors->ceiling_hex = rgb_to_hex(colors->ceiling);
+	if (type == FLOOR)
+		colors->floor_hex = rgb_to_hex(colors->floor);
 }
 
 int	get_color_type(const char *line)

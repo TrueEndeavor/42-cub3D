@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 11:25:27 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:01:57 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ void	parse_scene_file(t_data *data, char *scene_file)
 		}
 		if (map_flag)
 		{
+		//printf("line = %s\n", line);
 			if (is_map_line(line))
 			{
-				if (ft_strlen(line) > 0)
+				if (ft_strlen(line) > 0 || line[0] == '\n')
 				{
 					if (load_map(data, line))
 					{
@@ -106,6 +107,7 @@ void	parse_scene_file(t_data *data, char *scene_file)
 			}
 			else
 			{
+				display_error("Map appears in the wrong position within the file");
 				break ;
 			}
 		}

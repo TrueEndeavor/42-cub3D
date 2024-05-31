@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 11:08:09 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:28:20 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,12 @@ typedef struct TEXTURE_ELEMENT
 
 typedef struct COLORS
 {
-	t_rgb	floor;
-	int		floor_count;
-	t_rgb	ceiling;
-	int		ceiling_count;
+	t_rgb			floor;
+	int				floor_count;
+	t_rgb			ceiling;
+	int				ceiling_count;
+	unsigned long	floor_hex;
+	unsigned long	ceiling_hex;
 }	t_colors;
 
 typedef struct s_game
@@ -205,6 +207,7 @@ void	print_map_array(t_data *data);
 void	print_textures(t_data *data);
 
 int		check_texture_file(char *file_name);
+unsigned long	rgb_to_hex(t_rgb color);
 
 int		load_map(t_data *data, char *line);
 

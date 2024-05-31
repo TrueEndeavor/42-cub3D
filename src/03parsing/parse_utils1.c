@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:22:29 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/27 11:59:48 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:26:23 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,11 @@ int	check_texture_file(char *file_name)
 	if (fd > 0)
 		close(fd);
 	return (1);
+}
+
+unsigned long	rgb_to_hex(t_rgb color)
+{
+	return (((unsigned long)color.red << 16) | \
+		((unsigned long)color.green << 8) | \
+			(unsigned long)color.blue);
 }

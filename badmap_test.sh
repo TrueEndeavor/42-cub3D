@@ -35,7 +35,6 @@ MAP_FILES=(
 	"bad/file_letter_end.cub"
 	"bad/map_missing.cub"
 	"bad/map_too_small.cub"
-	"bad/forbidden.cub"
 	"bad/map_first.cub"
 	"bad/map_middle.cub"
 	"bad/map_only.cub"

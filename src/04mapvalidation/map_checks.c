@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 12:45:31 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:53:50 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,6 @@ int	check_map_size(t_data *data)
 	}
 	return (1);
 }
-
-/* int	check_size(t_data *data)
-{
-	if (data->win_height < MIN_HEIGHT || data->win_width < MIN_WIDTH
-		|| data->win_width > MAX_WIDTH || data->win_height > MAX_HEIGHT)
-	{
-		display_error("Size not adapted for game");
-		return (0);
-	}
-	return (1);
-} */
 
 int	check_chars(t_data *data)
 {
@@ -62,43 +51,6 @@ int	check_chars(t_data *data)
 	}
 	return (1);
 }
-/* 
-int	check_walls(t_data *data)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	if (set_dup_map(data))
-	{
-		for (int i = 0; i < data->map_height; i++)
-		{
-			printf("%s\n", data->dup_map[i]);
-		}
-	}
-	for (y = 0; y < data->map_height; y++)
-	{
-			printf("checkcoucou: y=%d\n", y);
-			x = 0;
-		if (y == 0 || y == (data->map_height - 1))
-		{
-			while (data->dup_map[y][x] != '\0')
-			{
-				printf("current char= %c\n", (data->dup_map[y][x]));
-				if (data->dup_map[y][x] != '1' && data->dup_map[y][x] != 'V')
-					return (0);
-				x++;
-			}
-		}
-		else if ((data->dup_map[y][x] != '1' && data->dup_map[y][x] != 'V') || \
-			((data->dup_map[y][(ft_strlen(data->dup_map[y])) - 1] != '1') && (data->dup_map[y][(ft_strlen(data->dup_map[y])-1)] != 'V')))
-			return (0); 
-		//y++;
-		printf("\next line");
-		printf("\n");
-	}
-	return (1);
-} */
 
 int	check_outer_enclosure(t_data *data, int i, int j)
 {
@@ -126,7 +78,7 @@ int is_row_enclosed(char *row)
 	int i;
 	int left_wall;
 	int right_wall;
-	
+
 	len = ft_strlen(row);
 	left_wall = 0;
 	right_wall = 0;
@@ -148,7 +100,7 @@ int is_column_enclosed(t_data *data, int col)
 	int i;
 	int top_wall;
 	int bottom_wall;
-	
+
 	i = 0;
 	top_wall = 0;
 	bottom_wall = 0;
@@ -215,32 +167,3 @@ int	check_walls(t_data *data)
 	}
 	return (1);
 }
-
-/*
-int	check_e_p_c_count(t_data *data)
-{
-	t_list	*current;
-	int		x;
-	int		y;
-
-	current = data->map;
-	y = 0;
-	while (current)
-	{
-		x = 0;
-		while (((char *)current->content)[x])
-		{
-			if (((char *)current->content)[x] == 'C')
-				data->c_count++;
-			if (((char *)current->content)[x] == 'E')
-				data->e_count++;
-			if (((char *)current->content)[x] == 'P')
-				data->p_count++;
-			x++;
-		}
-		current = current->next;
-		y++;
-	}
-	return (1);
-}
- */
