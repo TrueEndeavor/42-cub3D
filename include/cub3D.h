@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
+/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 18:08:09 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/06/03 11:36:02 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ bool	check_xpm_extension(char *file_name);
 void	print_all(t_data *data);
 void	print_map_array(t_data *data);
 void	print_textures(t_data *data);
+int		check_rows(t_data *data);
 
 int		check_texture_file(char *file_name);
 unsigned long	rgb_to_hex(t_rgb color);

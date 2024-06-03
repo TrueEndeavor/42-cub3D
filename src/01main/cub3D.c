@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
+/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 18:08:54 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/06/03 09:40:52 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-
-void check_user_position_and_set_camera(t_data *data)
-{
-		int i;
-		int j;
-
-		i = 0;
-		while (i < data->map_height)
-		{
-				j = 0;
-				while (j < data->map_width)
-				{
-						if (data->world_map[i][j] == 'N')
-						{
-								data->game.pos_x = i + 0.5  ;
-								data->game.pos_y = j + 0.5 ;
-								data->game.dir_x = -1;
-								data->game.dir_y = 0;
-								data->game.plane_x = 0;
-								data->game.plane_y = 0.66;
-								return ;
-						}
-						j++;
-				}
-				i++;
-		}
-}
 
 int	main(int ac, char **av)
 {
@@ -53,7 +25,6 @@ int	main(int ac, char **av)
 	if (!validate_map(&data))
 		on_destroy(&data);
 	convert_to_intarray(&data);
-	printf("map height and width = %d x %d\n", data.map_height, data.map_width);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		on_destroy(&data);

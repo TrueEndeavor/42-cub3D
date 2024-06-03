@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 16:01:57 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:14:18 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_line(char *line, t_data *data, bool *tex_flag, bool *col_flag)
 {
-	if (line == NULL)
+	if (!line)
 		return ;
 	trim_whitespace(&line);
 	if (is_texture_line(line))
@@ -29,97 +29,92 @@ void	parse_line(char *line, t_data *data, bool *tex_flag, bool *col_flag)
 	}
 }
 
-void	parse_scene_file(t_data *data, char *scene_file)
+int	parse_non_map_lines(int fd, t_data *data, bool *tex_flag, bool *col_flag)
 {
-	int		fd;
 	char	*line;
-	bool	map_flag;
-	bool	tex_flag;
-	bool	col_flag;
-	int		error_code;
-	int		empty_line_count;
 
-	tex_flag = false;
-	col_flag = false;
-	empty_line_count = 0;
-	error_code = 0;
-	map_flag = false;
-	fd = check_readable(data, scene_file);
 	line = get_next_line(fd);
-	if (!line)
-	{
-		display_error("The file is empty");
-		on_destroy(data);
-		return ;
-	}
 	while (line)
 	{
-		if (!line)
-		{
-			on_destroy(data);
-			break ;
-		}
 		trim_newline(line);
-		if (!map_flag)
+		if (ft_strlen(line) == 0)
 		{
-			if (ft_strlen(line) == 0)
-			{
-				free(line);
-				line = get_next_line(fd);
-				continue ;
-			}
-			if (is_texture_line(line) || is_color_line(line))
-			{
-				parse_line(line, data, &tex_flag, &col_flag);
-			}
-			else if (is_map_line(line))
-			{
-				if (tex_flag && col_flag)
-				{
-					error_code = check_textures_and_colors(data, tex_flag, col_flag);
-					if (error_code != 0)
-					{
-						display_error(get_error_message(error_code));
-						on_destroy(data);
-						return ;
-					}
-				}
-				map_flag = true;
-			}
+			free(line);
+			continue ;
 		}
-		if (map_flag)
+		parse_line(line, data, tex_flag, col_flag);
+		if (is_map_line(line))
 		{
-		//printf("line = %s\n", line);
-			if (is_map_line(line))
-			{
-				if (ft_strlen(line) > 0 || line[0] == '\n')
-				{
-					if (load_map(data, line))
-					{
-						data->map_height++;
-					}
-					else
-					{
-						on_destroy(data);
-						return ;
-					}
-				}
-			}
-			else
-			{
-				display_error("Map appears in the wrong position within the file");
-				break ;
-			}
+			free(line);
+			return (1);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (0);
+}
+
+int	parse_map_lines(int fd, t_data *data)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		trim_newline(line);
+		if (is_map_line(line))
+		{
+			if (!load_map(data, line))
+			{
+				free(line);
+				return (0);
+			}
+			data->map_height++;
+		}
+		else
+		{
+			free(line);
+			display_error("Map appears in the wrong position within the file");
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	validate_scene(t_data *data, bool tex_flag, bool col_flag)
+{
+	int	error_code;
+
 	error_code = check_textures_and_colors(data, tex_flag, col_flag);
 	if (error_code != 0)
 	{
 		display_error(get_error_message(error_code));
 		on_destroy(data);
+		return (0);
+	}
+	return (1);
+}
+
+void	parse_scene_file(t_data *data, char *scene_file)
+{
+	int		fd;
+	bool	tex_flag;
+	bool	col_flag;
+
+	tex_flag = false;
+	col_flag = false;
+	fd = check_readable(data, scene_file);
+	if (fd < 0 || !parse_non_map_lines(fd, data, &tex_flag, &col_flag))
+	{
+		display_error("The file is empty or incorrect format");
+		on_destroy(data);
+		return ;
+	}
+	if (!validate_scene(data, tex_flag, col_flag) || !parse_map_lines(fd, data))
+	{
+		on_destroy(data);
 		return ;
 	}
 	close(fd);
+	print_map_int_array(data->world_map, data->map_height, data->map_width);
 }

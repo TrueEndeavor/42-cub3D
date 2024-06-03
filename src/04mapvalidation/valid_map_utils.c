@@ -6,32 +6,39 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:05:12 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 16:33:58 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:14:56 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	convert_to_intarray(t_data *data)
+static int	**allocate_world_map(int height, int width)
 {
-	int		i;
-	int		j;
+	int	**world_map;
+	int	i;
 
+	world_map = (int **)ft_calloc(height, sizeof(int *));
+	if (!world_map)
+		return (NULL);
 	i = 0;
-	data->world_map = (int **)ft_calloc(data->map_height, sizeof(int *));
-	while (i < data->map_height)
+	while (i < height)
 	{
-		data->world_map[i] = (int *)ft_calloc(data->map_width, sizeof(int));
+		world_map[i] = (int *)ft_calloc(width, sizeof(int));
+		if (!world_map[i])
+			return (NULL);
 		i++;
 	}
+	return (world_map);
+}
+
+static void	fill_world_map(t_data *data)
+{
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < data->map_height)
 	{
-		if (data->dup_map[i] == NULL)
-		{
-			break ;
-		}
 		j = 0;
 		while (j < data->map_width)
 		{
@@ -39,10 +46,7 @@ void	convert_to_intarray(t_data *data)
 				data->world_map[i][j] = 1;
 			else if (data->dup_map[i][j] == '0')
 				data->world_map[i][j] = 0;
-			else if (data->dup_map[i][j] == 'N' || \
-				(data->dup_map[i][j] == 'E') || \
-				(data->dup_map[i][j] == 'S') || \
-				(data->dup_map[i][j] == 'W'))
+			else if (strchr("NESW", data->dup_map[i][j]))
 			{
 				data->game.pos_x = j;
 				data->game.pos_y = i;
@@ -54,5 +58,13 @@ void	convert_to_intarray(t_data *data)
 		}
 		i++;
 	}
+}
+
+void	convert_to_intarray(t_data *data)
+{
+	data->world_map = allocate_world_map(data->map_height, data->map_width);
+	if (!data->world_map)
+		return ;
+	fill_world_map(data);
 	print_map_int_array(data->world_map, data->map_height, data->map_width);
 }

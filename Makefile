@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+         #
+#    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/05/31 18:00:41 by rogalio          ###   ########.fr        #
+#    Updated: 2024/06/03 11:20:43 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS			=	src/01main/cub3D.c \
 					src/03parsing/parse_utils1.c	\
 					src/04mapvalidation/validate_map.c \
 					src/04mapvalidation/map_checks.c \
+					src/04mapvalidation/map_checks1.c \
 					src/07error/error_handling.c \
 					src/03parsing/load_map.c \
 					src/dev/print_debug.c	\
