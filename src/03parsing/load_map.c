@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:07:20 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 12:34:00 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:55:13 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,28 @@
 int	load_map(t_data *data, char *line)
 {
 	t_list	*new;
-	t_list	*last;
 	size_t	max_width;
 
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
+	if (!line || !data)
 		return (0);
-	if (ft_strcmp(line, "\n") == 0)
-		display_error("Invalid char in map");
-	new->content = ft_strdup(line);
-	if (!new->content)
-		return (0);
-	new->next = NULL;
-	if (!data->map)
+	new = ft_lstnew(ft_strdup(line));
+	if (!new || !new->content)
 	{
-		data->map = new;
-		return (1);
+		if (new)
+			free(new);
+		return (0);
 	}
-	last = ft_lstlast(data->map);
-	last->next = new;
+	if (ft_strcmp(line, "\n") == 0)
+	{
+		free(new->content);
+		free(new);
+		display_error("Invalid char in map");
+		return (0);
+	}
+	ft_lstadd_back(&data->map, new);
 	max_width = ft_strlen(line);
 	if ((int)max_width > data->map_width)
 		data->map_width = (int)max_width;
 	return (1);
 }
+

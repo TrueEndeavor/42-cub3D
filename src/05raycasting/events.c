@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
+/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:13:51 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 16:01:50 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:40:35 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void free_dup_map(t_data *data)
-{
-    int i;
-
-    i = 0;
-    while (i < data->map_height)
-    {
-        free(data->dup_map[i]);
-        i++;
-    }
-    free(data->dup_map);
-}
 
 int on_keypress(int key, t_data *data)
 {
@@ -32,7 +19,7 @@ int on_keypress(int key, t_data *data)
 
     if (key == 65307) // Touche Échap
     {
-
+        on_destroy(data);
         exit(0);
     }
     if (key == 119) // Touche W

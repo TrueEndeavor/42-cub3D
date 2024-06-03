@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 15:53:50 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:34:00 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ int	check_walls(t_data *data)
 	int	j;
 	int	status;
 
-	set_dup_map(data);
-	
+	if (!set_dup_map(data))
+		return (0);
 	status = check_outer_enclosure(data, 0, 0);
 	if (status != 1)
 	{

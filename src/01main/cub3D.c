@@ -3,46 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
+/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 15:57:59 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:19:02 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-
-
-/*
-void check_user_position_and_set_camera(t_data *data)
-{
-		int i;
-		int j;
-
-		i = 0;
-		while (i < data->map_height)
-		{
-				j = 0;
-				while (j < data->map_width)
-				{
-						if (data->world_map[i][j] == 'N')
-						{
-								data->game.pos_x = i + 0  ;
-								data->game.pos_y = j + 0 ;
-								data->game.dir_x = -1;
-								data->game.dir_y = 0;
-								data->game.plane_x = 0;
-								data->game.plane_y = 0.66;
-								return ;
-						}
-						j++;
-				}
-				i++;
-		}
-}
-*/
-
 
 int	main(int ac, char **av)
 {
@@ -54,7 +22,7 @@ int	main(int ac, char **av)
 	if (!check_cub_extension(av[1]))
 		on_destroy(&data);
 	parse_scene_file(&data, av[1]);
-	if (!validate_map(&data))
+ 	if (!validate_map(&data))
 		on_destroy(&data);
 	convert_to_intarray(&data);
 	printf("map height and width = %d x %d\n", data.map_height, data.map_width);
@@ -71,5 +39,6 @@ int	main(int ac, char **av)
 	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask,
 		&on_destroy, &data);
 	mlx_loop(data.mlx_ptr);
+	on_destroy(&data);
 	return (0);
 }
