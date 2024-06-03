@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:05:12 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 11:14:56 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:30:02 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void	fill_world_map(t_data *data)
 				data->world_map[i][j] = 0;
 			else if (strchr("NESW", data->dup_map[i][j]))
 			{
-				data->game.pos_x = j;
-				data->game.pos_y = i;
+				data->game.pos_x = i;
+				data->game.pos_y = j;
 				data->world_map[i][j] = 0;
 			}
 			else

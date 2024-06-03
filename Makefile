@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/06/03 11:20:43 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/06/03 18:28:01 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS			=	src/01main/cub3D.c \
 					src/04mapvalidation/validate_map.c \
 					src/04mapvalidation/map_checks.c \
 					src/04mapvalidation/map_checks1.c \
+					src/04mapvalidation/player_check.c \
 					src/07error/error_handling.c \
 					src/03parsing/load_map.c \
 					src/dev/print_debug.c	\

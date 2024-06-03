@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
+/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:13:51 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 17:52:45 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:40:35 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-
 
 int on_keypress(int key, t_data *data)
 {
@@ -20,7 +18,10 @@ int on_keypress(int key, t_data *data)
     double rotSpeed = 0.3;  // Vitesse de rotation
 
     if (key == 65307) // Touche Échap
+    {
+        on_destroy(data);
         exit(0);
+    }
     if (key == 119) // Touche W
         move_up(data, moveSpeed);
     if (key == 115) // Touche S

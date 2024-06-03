@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 10:28:16 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:54:38 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_data(t_data *data)
 	data->win_height = WIN_HEIGHT;
 	data->win_width = WIN_WIDTH;
 	data->map_height = 0;
+	data->map_width = 0;
 	init_all_texures(&data->textures);
 	init_all_colors(&data->colors);
 	initialize_game(&data->game);

@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:47:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 11:24:47 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:09:10 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	get_texture(char *line, char **texture, int *count)
 {
+	if (*texture != NULL)
+	{
+		free(*texture);
+	}
 	trim_whitespace(&line);
 	*texture = ft_strdup(line);
 	(*count)++;

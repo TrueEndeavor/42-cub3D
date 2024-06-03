@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 11:36:02 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:27:11 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,21 +168,12 @@ typedef struct s_data
 
 	int			**world_map;
 	char		**dup_map;
-	int		e_count;
-	int		p_count;
-	int		c_count;
-	int		start_x;
-	int		start_y;
-
+	
 	void	*north_texture;
 	void	*east_texture;
 	void	*south_texture;
 	void	*west_texture;
 
-	int		cat_x;
-	int		cat_y;
-	int		collected;
-	int		moves;
 }	t_data;
 
 
@@ -227,9 +218,11 @@ void	print_all(t_data *data);
 void	print_map_array(t_data *data);
 void	print_textures(t_data *data);
 int		check_rows(t_data *data);
+int		check_players(t_data *data);
 
 int		check_texture_file(char *file_name);
 unsigned long	rgb_to_hex(t_rgb color);
+void	free_dup_map(t_data *data);
 
 int		load_map(t_data *data, char *line);
 
