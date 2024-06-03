@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:54:17 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 18:19:09 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 21:00:35 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,11 @@ int	check_for_players(t_data *data, int i, int j)
 			data->dup_map[i][j] == 'E' || \
 			data->dup_map[i][j] == 'S' || \
 			data->dup_map[i][j] == 'W')
-			{
-				//dprintf(1, "the char is = %c\n", data->dup_map[i][j]);
-				return (1);
-			}
+			return (1);
 		j++;
 	}
 	return (0);
 }
-
 
 int	check_players(t_data *data)
 {

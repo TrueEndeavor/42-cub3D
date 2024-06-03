@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:07:20 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 16:55:13 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:43:43 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ int	load_map(t_data *data, char *line)
 		data->map_width = (int)max_width;
 	return (1);
 }
-

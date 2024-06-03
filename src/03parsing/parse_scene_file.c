@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 16:01:57 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:59:20 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	parse_line(char *line, t_data *data, bool *tex_flag, bool *col_flag)
 		*col_flag = true;
 	}
 }
+
 
 void	parse_scene_file(t_data *data, char *scene_file)
 {

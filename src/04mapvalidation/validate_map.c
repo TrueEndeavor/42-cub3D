@@ -6,21 +6,26 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 18:18:53 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 21:08:19 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	validate_map(t_data *data)
+int	validate_map_info(t_data *data)
 {
-	int	status;
-
 	if (!data->map)
 	{
 		display_error("Missing map info");
 		return (0);
 	}
+	return (1);
+}
+
+int	validate_map(t_data *data)
+{
+	int	status;
+
 	if (!check_map_size(data))
 		return (0);
 	if (!check_chars(data))
@@ -47,3 +52,4 @@ int	validate_map(t_data *data)
 	}
 	return (1);
 }
+
