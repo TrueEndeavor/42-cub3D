@@ -6,13 +6,15 @@
 /*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 18:08:54 by rogalio          ###   ########.fr       */
+/*   Updated: 2024/06/03 15:57:59 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 
+
+/*
 void check_user_position_and_set_camera(t_data *data)
 {
 		int i;
@@ -26,8 +28,8 @@ void check_user_position_and_set_camera(t_data *data)
 				{
 						if (data->world_map[i][j] == 'N')
 						{
-								data->game.pos_x = i + 0.5  ;
-								data->game.pos_y = j + 0.5 ;
+								data->game.pos_x = i + 0  ;
+								data->game.pos_y = j + 0 ;
 								data->game.dir_x = -1;
 								data->game.dir_y = 0;
 								data->game.plane_x = 0;
@@ -39,6 +41,8 @@ void check_user_position_and_set_camera(t_data *data)
 				i++;
 		}
 }
+*/
+
 
 int	main(int ac, char **av)
 {

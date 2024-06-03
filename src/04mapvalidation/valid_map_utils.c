@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:05:12 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 16:33:58 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:57:04 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	convert_to_intarray(t_data *data)
 				(data->dup_map[i][j] == 'S') || \
 				(data->dup_map[i][j] == 'W'))
 			{
-				data->game.pos_x = j;
-				data->game.pos_y = i;
+				data->game.pos_x = i;
+				data->game.pos_y = j;
 				data->world_map[i][j] = 0;
 			}
 			else
