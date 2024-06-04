@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/04 13:11:11 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:42:07 by rogalio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,8 @@ void detect_walls(t_data *data, t_ray *ray);
 void calculate_ray_parameters(t_data *data, int x, t_ray *ray);
 void	move_up(t_data *data, double move_speed);
 void	move_down(t_data *data, double move_speed);
+void move_left(t_data *data, double move_speed);
+void move_right(t_data *data, double move_speed);
 char	check_next_move(t_data *data, int x, int y);
 void	check_collected(t_data *data, int x, int y);
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/06/04 13:11:23 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/06/04 15:42:39 by rogalio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRCS			=	src/01main/cub3D.c \
 					src/05raycasting/raycasting.c \
 					src/05raycasting/raycasting1.c \
 					src/05raycasting/move.c \
+					src/05raycasting/rotate.c \
 					src/05raycasting/draw.c
 
 OBJS_DIR = obs
