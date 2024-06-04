@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rogalio <rmouchel@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:50:42 by rogalio           #+#    #+#             */
-/*   Updated: 2024/06/04 13:05:27 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:31:01 by rmouchel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,27 @@ void	*init_new_image(t_data *data, int **img_data)
 	return (img);
 }
 
+void	draw_floor_ceiling(t_data *data, int *img_data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < data->win_height)
+	{
+		x = 0;
+		while (x < data->win_width)
+		{
+			if (y < data->win_height / 2)
+				img_data[y * data->win_width + x] = data->colors.ceiling_hex;
+			else
+				img_data[y * data->win_width + x] = data->colors.floor_hex;
+			x++;
+		}
+		y++;
+	}
+}
+
 int	render(t_data *data)
 {
 	int		x;
@@ -31,6 +52,7 @@ int	render(t_data *data)
 
 	x = 0;
 	img = init_new_image(data, &img_data);
+	draw_floor_ceiling(data, img_data);
 	while (x < data->win_width)
 	{
 		calculate_ray_parameters(data, x, &ray);
