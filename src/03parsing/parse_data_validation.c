@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:26:25 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 11:27:38 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:38:26 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	colors_have_valid_rgb(t_colors *colors)
 			(colors->ceiling.blue >= 0 && colors->ceiling.blue <= 255));
 }
 
-int	check_textures_and_colors(t_data *data, bool tex_flag, bool col_flag)
+int	check_tex_col(t_data *data, bool tex_flag, bool col_flag)
 {
 	if (!textures_are_valid(&data->textures))
 		return (ERR_TEXTURE_MISSING_OR_DUPLICATED);

@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 09:33:13 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/27 14:26:37 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 09:24:57 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ int	display_error(char *str)
 	write(1, "[ERROR] ", 8);
 	ft_putstr_fd(str, 1);
 	write(1, "\n", 1);
-	//return (0);
 	exit (1);
 }
-
 
 char	*get_error_message(int error_code)
 {

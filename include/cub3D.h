@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 18:03:36 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:11:11 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 
 /* *****************************   CONSTANTS   *******************************/
 
-#define screenWidth 640
-#define screenHeight 480
+# define screenWidth 640
+# define screenHeight 480
 
 # define NORTH 1
 # define EAST 2
@@ -128,23 +128,23 @@ typedef struct s_game
 
 typedef struct s_ray
 {
-    double cameraX;
-    double rayDirX;
-    double rayDirY;
-    int mapX;
-    int mapY;
-    double sideDistX;
-    double sideDistY;
-    double deltaDistX;
-    double deltaDistY;
-    double perpWallDist;
-    int stepX;
-    int stepY;
-    int side;
-    int lineHeight;
-    int drawStart;
-    int drawEnd;
-} t_ray;
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+	int mapY;
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double perpWallDist;
+	int stepX;
+	int stepY;
+	int side;
+	int lineHeight;
+	int drawStart;
+	int drawEnd;
+}	t_ray;
 
 
 typedef struct s_data
@@ -168,7 +168,7 @@ typedef struct s_data
 
 	int			**world_map;
 	char		**dup_map;
-	
+
 	void	*north_texture;
 	void	*east_texture;
 	void	*south_texture;
@@ -203,11 +203,13 @@ bool	textures_are_valid(t_textures *textures);
 bool	texture_files_exist(t_textures *textures);
 bool	colors_are_valid(t_colors *colors);
 bool	colors_have_valid_rgb(t_colors *colors);
-int		check_textures_and_colors(t_data *data, bool tex_flag, bool col_flag);
+int		check_tex_col(t_data *data, bool tex_flag, bool col_flag);
 int		check_map_size(t_data *data);
 int		set_dup_map(t_data *data);
 /* *************************   PARSING UTILS  ****************************/
 void	trim_whitespace(char **line);
+void	cleanup_and_exit(t_data *data, char *line, int fd, int error_code);
+void	handle_error(t_data *data, bool tex_flag, bool col_flag);
 char	*trim_newline(char *str);
 int		is_texture_line(char *line);
 int		is_color_line(char *line);
@@ -218,6 +220,12 @@ void	print_all(t_data *data);
 void	print_map_array(t_data *data);
 void	print_textures(t_data *data);
 int		check_players(t_data *data);
+void	load_north_texture(t_data *data);
+void	load_east_texture(t_data *data);
+void	load_south_texture(t_data *data);
+void	load_west_texture(t_data *data);
+void	initialize_ray_steps(t_data *data, t_ray *ray);
+void	calculate_ray_parameters(t_data *data, int x, t_ray *ray);
 
 int		check_texture_file(char *file_name);
 unsigned long	rgb_to_hex(t_rgb color);

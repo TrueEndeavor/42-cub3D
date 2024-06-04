@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2024/06/03 18:04:30 by lannur-s         ###   ########.fr        #
+#    Updated: 2024/06/04 13:11:23 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS			=	src/01main/cub3D.c \
 					src/03parsing/parse_utils1.c	\
 					src/04mapvalidation/validate_map.c \
 					src/04mapvalidation/map_checks.c \
+					src/04mapvalidation/map_checks1.c \
 					src/04mapvalidation/player_check.c \
 					src/07error/error_handling.c \
 					src/03parsing/load_map.c \
@@ -49,9 +50,11 @@ SRCS			=	src/01main/cub3D.c \
 					src/04mapvalidation/valid_map_utils.c \
 					src/06destroy/destroy.c \
 					src/05raycasting/setup.c \
+					src/05raycasting/load_textures.c \
 					src/05raycasting/events.c \
 					src/05raycasting/render.c \
 					src/05raycasting/raycasting.c \
+					src/05raycasting/raycasting1.c \
 					src/05raycasting/move.c \
 					src/05raycasting/draw.c
 

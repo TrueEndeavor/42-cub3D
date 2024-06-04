@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/03 20:59:20 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:44:18 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,71 @@ void	parse_line(char *line, t_data *data, bool *tex_flag, bool *col_flag)
 	}
 }
 
+int	process_map_line(char *line, t_data *data)
+{
+	if (is_map_line(line))
+	{
+		if (ft_strlen(line) > 0 || line[0] == '\n')
+		{
+			if (load_map(data, line))
+			{
+				data->map_height++;
+			}
+			else
+			{
+				on_destroy(data);
+				return (0);
+			}
+		}
+	}
+	return (1);
+}
+
+void	process_texture_or_color(char *line, t_data *data, bool *flags)
+{
+	parse_line(line, data, &flags[1], &flags[2]);
+}
+
+void	process_line(t_data *data, char *line, bool *flags)
+{
+	if (!line)
+	{
+		on_destroy(data);
+		return ;
+	}
+	trim_newline(line);
+	if (!flags[0])
+	{
+		if (ft_strlen(line) == 0)
+		{
+			free(line);
+			return ;
+		}
+		if (is_texture_line(line) || is_color_line(line))
+			process_texture_or_color(line, data, flags);
+		else if (is_map_line(line))
+		{
+			if (flags[1] && flags[2])
+				handle_error(data, flags[1], flags[2]);
+			flags[0] = true;
+		}
+	}
+	if (flags[0] && !process_map_line(line, data))
+		display_error("Map is not the last of the file");
+	free(line);
+}
 
 void	parse_scene_file(t_data *data, char *scene_file)
 {
 	int		fd;
 	char	*line;
-	bool	map_flag;
-	bool	tex_flag;
-	bool	col_flag;
+	bool	flags[3];
 	int		error_code;
-	int		empty_line_count;
 
-	tex_flag = false;
-	col_flag = false;
-	empty_line_count = 0;
+	flags[0] = false;
+	flags[1] = false;
+	flags[2] = false;
 	error_code = 0;
-	map_flag = false;
 	fd = check_readable(data, scene_file);
 	line = get_next_line(fd);
 	if (!line)
@@ -55,72 +104,9 @@ void	parse_scene_file(t_data *data, char *scene_file)
 	}
 	while (line)
 	{
-		if (!line)
-		{
-			on_destroy(data);
-			break ;
-		}
-		trim_newline(line);
-		if (!map_flag)
-		{
-			if (ft_strlen(line) == 0)
-			{
-				free(line);
-				line = get_next_line(fd);
-				continue ;
-			}
-			if (is_texture_line(line) || is_color_line(line))
-			{
-				parse_line(line, data, &tex_flag, &col_flag);
-			}
-			else if (is_map_line(line))
-			{
-				if (tex_flag && col_flag)
-				{
-					error_code = check_textures_and_colors(data, tex_flag, col_flag);
-					if (error_code != 0)
-					{
-						display_error(get_error_message(error_code));
-						on_destroy(data);
-						return ;
-					}
-				}
-				map_flag = true;
-			}
-		}
-		if (map_flag)
-		{
-		//printf("line = %s\n", line);
-			if (is_map_line(line))
-			{
-				if (ft_strlen(line) > 0 || line[0] == '\n')
-				{
-					if (load_map(data, line))
-					{
-						data->map_height++;
-					}
-					else
-					{
-						on_destroy(data);
-						return ;
-					}
-				}
-			}
-			else
-			{
-				display_error("Map appears in the wrong position within the file");
-				break ;
-			}
-		}
-		free(line);
+		process_line(data, line, flags);
 		line = get_next_line(fd);
 	}
-	error_code = check_textures_and_colors(data, tex_flag, col_flag);
-	if (error_code != 0)
-	{
-		display_error(get_error_message(error_code));
-		on_destroy(data);
-		return ;
-	}
-	close(fd);
+	error_code = check_tex_col(data, flags[1], flags[2]);
+	cleanup_and_exit(data, line, fd, error_code);
 }

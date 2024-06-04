@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:22:29 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/05/31 16:26:23 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:44:02 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,28 @@ unsigned long	rgb_to_hex(t_rgb color)
 	return (((unsigned long)color.red << 16) | \
 		((unsigned long)color.green << 8) | \
 			(unsigned long)color.blue);
+}
+
+void	cleanup_and_exit(t_data *data, char *line, int fd, int error_code)
+{
+	if (line)
+		free(line);
+	if (error_code != 0)
+	{
+		display_error(get_error_message(error_code));
+		on_destroy(data);
+	}
+	close(fd);
+}
+
+void	handle_error(t_data *data, bool tex_flag, bool col_flag)
+{
+	int	error_code;
+
+	error_code = check_tex_col(data, tex_flag, col_flag);
+	if (error_code != 0)
+	{
+		display_error(get_error_message(error_code));
+		on_destroy(data);
+	}
 }
