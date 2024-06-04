@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/04 12:21:34 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:30:07 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,7 @@ int	is_column_enclosed(t_data *data, int col)
 	bottom_wall = 0;
 	while (i < data->map_height && \
 		(data->dup_map[i][col] == ' ' || data->dup_map[i][col] == '\0'))
-	{
 		i++;
-	}
 	if (i < data->map_height && data->dup_map[i][col] == '1')
 		top_wall = 1;
 	i = data->map_height - 1;
@@ -103,7 +101,9 @@ int	check_walls(t_data *data)
 			return (0);
 		j++;
 	}
-	if (check_outer_enclosure(data, 0, 0) != 1)
+	if (check_outer_enclosure(data, i, 0) != 1)
+	{
 		return (0);
+	}
 	return (1);
 }

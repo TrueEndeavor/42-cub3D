@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2024/06/04 09:35:41 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:14:30 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	validate_map(t_data *data)
 	if (!check_chars(data))
 		return (0);
 	status = check_walls(data);
+	printf("check walls status = %d\n", status);
 	if (status != 1)
 	{
 		if (status == 0)
